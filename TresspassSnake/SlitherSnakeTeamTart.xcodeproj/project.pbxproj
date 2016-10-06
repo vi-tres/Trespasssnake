@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1479335F1DA6B74900BE4FED /* EndScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1479335E1DA6B74800BE4FED /* EndScene.swift */; };
+		147933631DA6BBB000BE4FED /* gameover.png in Resources */ = {isa = PBXBuildFile; fileRef = 147933621DA6BBB000BE4FED /* gameover.png */; };
 		14CBAAF91D8D654C00B3AE4B /* strawberry.png in Resources */ = {isa = PBXBuildFile; fileRef = 14CBAAF51D8D654C00B3AE4B /* strawberry.png */; };
 		14CBAAFE1D8D694D00B3AE4B /* apple.png in Resources */ = {isa = PBXBuildFile; fileRef = 14CBAAFD1D8D694D00B3AE4B /* apple.png */; };
 		14CBAB001D8D6A2100B3AE4B /* cherry.png in Resources */ = {isa = PBXBuildFile; fileRef = 14CBAAFF1D8D6A2100B3AE4B /* cherry.png */; };
@@ -45,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1479335E1DA6B74800BE4FED /* EndScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndScene.swift; sourceTree = "<group>"; };
+		147933621DA6BBB000BE4FED /* gameover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gameover.png; path = ../gameover.png; sourceTree = "<group>"; };
 		14CBAAF51D8D654C00B3AE4B /* strawberry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strawberry.png; sourceTree = "<group>"; };
 		14CBAAFD1D8D694D00B3AE4B /* apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apple.png; sourceTree = "<group>"; };
 		14CBAAFF1D8D6A2100B3AE4B /* cherry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cherry.png; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 				14CBAB051D8D705B00B3AE4B /* banana.png */,
 				14CBAAFD1D8D694D00B3AE4B /* apple.png */,
 				14CBAAFF1D8D6A2100B3AE4B /* cherry.png */,
+				147933621DA6BBB000BE4FED /* gameover.png */,
 				14F5995B1D83D05000780E84 /* Snake.png */,
 				14F5995F1D83D50F00780E84 /* pinDrop.wav */,
 				14F599631D83E3DF00780E84 /* shapesBG.png */,
@@ -136,6 +141,7 @@
 				14F599321D83CAC100780E84 /* LaunchScreen.storyboard */,
 				14F599351D83CAC100780E84 /* Info.plist */,
 				14F599651D83E65B00780E84 /* Snake.swift */,
+				1479335E1DA6B74800BE4FED /* EndScene.swift */,
 			);
 			path = SlitherSnakeTeamTart;
 			sourceTree = "<group>";
@@ -271,6 +277,7 @@
 				14CBAB001D8D6A2100B3AE4B /* cherry.png in Resources */,
 				14CBAAF91D8D654C00B3AE4B /* strawberry.png in Resources */,
 				14CBAB061D8D705B00B3AE4B /* banana.png in Resources */,
+				147933631DA6BBB000BE4FED /* gameover.png in Resources */,
 				14F599341D83CAC100780E84 /* LaunchScreen.storyboard in Resources */,
 				14F599311D83CAC100780E84 /* Assets.xcassets in Resources */,
 				14CBAAFE1D8D694D00B3AE4B /* apple.png in Resources */,
@@ -303,6 +310,7 @@
 				14F5992A1D83CAC100780E84 /* GameScene.swift in Sources */,
 				14F5992C1D83CAC100780E84 /* GameViewController.swift in Sources */,
 				14F599261D83CAC100780E84 /* AppDelegate.swift in Sources */,
+				1479335F1DA6B74900BE4FED /* EndScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

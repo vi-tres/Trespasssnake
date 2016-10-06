@@ -27,13 +27,7 @@ class GameViewController: UIViewController {
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
             skView.presentScene(scene)
-            
-            /*let backgroundImageView=UIImageView(image: UIImage(named:"shapesBG.jpeg"))
-            backgroundImageView.frame = view.frame
-            backgroundImageView.contentMode = .ScaleAspectFill
-            view.addSubview(backgroundImageView)
-            view.sendSubviewToBack(backgroundImageView)
-            */
+
         }
     }
 
