@@ -212,7 +212,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                 if (sqrt(pow(she[0].position.x-part.position.x, 2)+pow(she[0].position.y-part.position.y, 2))<10)
                 {
                     status = true
-                    self.view?.presentScene(EndScene())
+                    //self.view?.presentScene(EndScene())
                 }
             }
         }
