@@ -37,7 +37,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-
+        
+        self.camera=theCamera
         //Setup score label
         ScoreLbl=UILabel(frame:CGRect(x:0,y:0,width: 100,height: 50))
         ScoreLbl.textColor=UIColor.whiteColor()
