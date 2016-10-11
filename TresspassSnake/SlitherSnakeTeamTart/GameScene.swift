@@ -19,6 +19,8 @@ var Player: Array<SKShapeNode>=[]
 var Score = Int()
 var ScoreLbl=UILabel()
 
+var PlayerLabel=UILabel()
+
 var mydir:CGPoint = CGPoint(x:1,y:0)
 var adir:Array<CGPoint>! = []
 
@@ -34,17 +36,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var fruit :SKShapeNode!
     var enemys:Array<Array<SKShapeNode>>!=[]
     var enemy:Array<SKShapeNode>!
+    var playername = " "
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         
         self.camera=theCamera
         //Setup score label
-        ScoreLbl=UILabel(frame:CGRect(x:0,y:0,width: 100,height: 50))
+        ScoreLbl=UILabel(frame:CGRect(x:100,y:0,width: 100,height: 50))
         ScoreLbl.textColor=UIColor.whiteColor()
         ScoreLbl.backgroundColor=UIColor.grayColor()
         ScoreLbl.text="Score: "
         self.view?.addSubview(ScoreLbl)
+        
+        //Setup playername label
+        PlayerLabel=UILabel(frame:CGRect(x:0,y:0,width: 100,height: 50))
+        PlayerLabel.textColor=UIColor.whiteColor()
+        PlayerLabel.backgroundColor=UIColor.grayColor()
+        PlayerLabel.text = playername
+        PlayerLabel.textAlignment = NSTextAlignment.Center
+        self.view?.addSubview(PlayerLabel)
+
         
         mine = createSnake(CGPoint(x: self.frame.midX, y: self.frame.midY), dir: mydir)
 
@@ -261,8 +273,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             if (count % 10 == 0)
             {
                 
-                var x1:CGFloat = (CGFloat(arc4random()%1000))/500.0-1.0;
-                var y1:CGFloat = pow(-1, CGFloat(arc4random()))*sqrt(1-pow(x1, 2))
+                let x1:CGFloat = (CGFloat(arc4random()%1000))/500.0-1.0;
+                let y1:CGFloat = pow(-1, CGFloat(arc4random()))*sqrt(1-pow(x1, 2))
                 adir[i] = CGPoint.init(x: x1, y: y1)
             }
             enemy = self.enemys[i]
