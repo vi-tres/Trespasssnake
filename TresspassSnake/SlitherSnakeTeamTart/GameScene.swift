@@ -24,6 +24,7 @@ var PlayerLabel=UILabel()
 var mydir:CGPoint = CGPoint(x:1,y:0)
 var adir:Array<CGPoint>! = []
 
+@available(iOS 9.0, *)
 var theCamera: SKCameraNode = SKCameraNode()
 var count:Int = 0
 var xVelocity: CGFloat = 0
@@ -41,7 +42,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         
-        self.camera=theCamera
+        if #available(iOS 9.0, *) {
+            self.camera=theCamera
+        } else {
+            // Fallback on earlier versions
+        }
         //Setup score label
         ScoreLbl=UILabel(frame:CGRect(x:100,y:0,width: 100,height: 50))
         ScoreLbl.textColor=UIColor.whiteColor()
@@ -84,7 +89,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
         
         //set initial camera start position
-        theCamera.position = CGPoint(x: self.mine[0].position.x - self.frame.midX/2, y: self.mine[0].position.y)
+        if #available(iOS 9.0, *) {
+            theCamera.position = CGPoint(x: self.mine[0].position.x - self.frame.midX/2, y: self.mine[0].position.y)
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     func createSnake(posi: CGPoint, dir :CGPoint)->Array<SKShapeNode>
@@ -264,7 +273,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     //Update
     override func update(currentTime: CFTimeInterval) {
-        print(theCamera.position)
+        if #available(iOS 9.0, *) {
+            print(theCamera.position)
+        } else {
+            // Fallback on earlier versions
+        }
         print(self.mine[0].position)
         self.snakeMove(self.mine, dir:mydir)
 
@@ -333,7 +346,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             self.mine = self.extendLength(self.mine)
         }
         //reset camera position
-        theCamera.position = CGPoint(x: self.mine[0].position.x - self.frame.midX/2, y: self.mine[0].position.y)
+        if #available(iOS 9.0, *) {
+            theCamera.position = CGPoint(x: self.mine[0].position.x - self.frame.midX/2, y: self.mine[0].position.y)
+        } else {
+            // Fallback on earlier versions
+        }
         if(snakeDie(self.mine, othershes: enemys))
         {
             mine[0].fillColor = UIColor.greenColor()

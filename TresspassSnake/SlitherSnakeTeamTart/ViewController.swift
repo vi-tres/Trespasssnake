@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         let secondVC = segue.destinationViewController as! GameViewController
         secondVC.PlayerName = textField.text!
+        
     }
 
     /*
