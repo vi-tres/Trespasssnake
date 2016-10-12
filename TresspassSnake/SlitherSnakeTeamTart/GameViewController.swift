@@ -10,8 +10,11 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController {
+    
+    var PlayerName = ""
 
     override func viewDidLoad() {
+        
         
         super.viewDidLoad()
      
@@ -23,19 +26,17 @@ class GameViewController: UIViewController {
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
+            skView.allowsTransparency = true
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
+            scene.playername = PlayerName
+            scene.backgroundColor = UIColor.greenColor()
+            
             skView.presentScene(scene)
             
-            /*let backgroundImageView=UIImageView(image: UIImage(named:"shapesBG.jpeg"))
-            backgroundImageView.frame = view.frame
-            backgroundImageView.contentMode = .ScaleAspectFill
-            view.addSubview(backgroundImageView)
-            view.sendSubviewToBack(backgroundImageView)
-            */
-        }
-    }
+            
+        }    }
 
     override func shouldAutorotate() -> Bool {
         return true
