@@ -1,165 +1,191 @@
 //
-//  MultipleViewController.swift
-//  SlitherSnakeTeamTart
+//  ChatViewController.swift
+//  MPCRevisited
 //
-//  Created by 赵泽宇 on 16/10/11.
-//  Copyright © 2016年 Tart. All rights reserved.
+//  Created by Gabriel Theodoropoulos on 11/1/15.
+//  Copyright (c) 2015 Appcoda. All rights reserved.
 //
 
 import UIKit
 import MultipeerConnectivity
 
-class MultipleViewController: UIViewController, MCBrowserViewControllerDelegate,UITextFieldDelegate, UITableViewDelegate {
+class MultipleViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
-        
-   
-    @IBOutlet var fields: [TextField]!
-   
+    @IBOutlet weak var txtChat: UITextField!
     
-    var currentPlayer:String!
+    @IBOutlet weak var tblChat: UITableView!
     
-    //var appDelegate:AppDelegate!
     var messagesArray: [Dictionary<String, String>] = []
-    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.mpcHandler.setupPeerWithDisplayName(UIDevice.currentDevice().name)
-        appDelegate.mpcHandler.setupSession()
-        appDelegate.mpcHandler.advertiseSelf(true)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MultipleViewController.peerChangedStateWithNotification(_:)), name: "MPC_DidChangeStateNotification", object: nil)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MultipleViewController.handleReceivedDataWithNotification(_:)), name: "MPC_DidReceiveDataNotification", object: nil)
-        
-        //setupField()
-        //fields.delegate = self
-        currentPlayer = "x"
-
         // Do any additional setup after loading the view.
+        
+        tblChat.delegate = self
+        tblChat.dataSource = self
+        
+        tblChat.estimatedRowHeight = 60.0
+        tblChat.rowHeight = UITableViewAutomaticDimension
+        
+        txtChat.delegate = self
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleMPCReceivedDataWithNotification:", name: "receivedMPCDataNotification", object: nil)
     }
-    
-    @IBAction func connectWithPlayer(sender: AnyObject) {
-        if appDelegate.mpcHandler.session != nil{
-            appDelegate.mpcHandler.setupBrowser()
-            appDelegate.mpcHandler.browser.delegate = self
-            
-            self.presentViewController(appDelegate.mpcHandler.browser, animated: true, completion: nil)
-            
-        }
-
-    }
-    
-    
-    
-    func peerChangedStateWithNotification(notification:NSNotification){
-        let userInfo = NSDictionary(dictionary: notification.userInfo!)
-        
-        let state = userInfo.objectForKey("state") as! Int
-        
-        if state != MCSessionState.Connecting.rawValue{
-            self.navigationItem.title = "Connected"
-        }
-        
-    }
-    
-    func handleReceivedDataWithNotification(notification:NSNotification){
-        let userInfo = notification.userInfo! as Dictionary
-        let receivedData:NSData = userInfo["data"] as! NSData
-        
-        //let message = NSJSONSerialization.JSONObjectWithData(receivedData, options: NSJSONReadingOptions.AllowFragments, error: nil) as NSDictionary
-        
-        let message = try! NSJSONSerialization.JSONObjectWithData(receivedData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-        
-        
-        
-        
-        
-        let senderPeerId:MCPeerID = userInfo["peerID"] as! MCPeerID
-        let senderDisplayName = senderPeerId.displayName
-
-            var field:Int? = message.objectForKey("field")?.integerValue
-            var player:String? = message.objectForKey("player") as? String
-            
-            if field != nil && player != nil{
-                fields[field!].player = player
-                fields[field!].settPlayer(player!)
-        }
-        
-        
-    }
-    
-   func fieldTapped (recognizer:UITextField){
-        let tappedField  = recognizer.textInputView as! TextField
-        
-        tappedField.settPlayer(currentPlayer)
-        
-        let messageDict = ["field":tappedField.tag, "player":currentPlayer]
-        //skip the error here
-        let messageData = try! NSJSONSerialization.dataWithJSONObject(messageDict, options: NSJSONWritingOptions.PrettyPrinted)
-        
-        //var error:NSError?
-        
-        do {
-            try! appDelegate.mpcHandler.session.sendData(messageData, toPeers: appDelegate.mpcHandler.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
-        } catch let error as NSError?{
-            print("error: \(error!.localizedDescription)")
-        }
-        //try! appDelegate.mpcHandler.session.sendData(messageData, toPeers: appDelegate.mpcHandler.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable) as! NSError
-        
-        
-        
-        //if error != nil{
-        //    print("error: \(error?.localizedDescription)")
-        //}
-    
-        
-        
-    }
-
-    /**func setupField (){
-        
-            let gestureRecognizer = UITextField(target: self, action: #selector(MultipleViewController.fieldTapped(_:)))
-        
-        let gR = UITextField(MultipleViewController.fieldTapped(_:))
-            fields
-    }**/
-    
-    /**func resetField(){
-        for index in 0 ... fields.count - 1{
-            fields[index].image = nil
-            fields[index].activated = false
-            fields[index].player = ""
-        }
-        
-        currentPlayer = "x"
-    }**/
-
-    func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!) {
-        appDelegate.mpcHandler.browser.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!) {
-        appDelegate.mpcHandler.browser.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
+    
+    // MARK: IBAction method implementation
+    
+    
+    @IBAction func endChat(sender: AnyObject) {
+        let messageDictionary: [String: String] = ["message": "_end_chat_"]
+        if appDelegate.mpcHandler.sendData(dictionaryWithData: messageDictionary, toPeer: appDelegate.mpcHandler.session.connectedPeers[0] as MCPeerID){
+            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                self.appDelegate.mpcHandler.session.disconnect()
+            })
+        }
     }
-    */
-
+    
+    
+    // MARK: UITableView related method implementation
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messagesArray.count
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("idCell") as UITableViewCell!
+        
+        let currentMessage = messagesArray[indexPath.row] as Dictionary<String, String>
+        
+        if let sender = currentMessage["sender"] {
+            var senderLabelText: String
+            var senderColor: UIColor
+            
+            if sender == "self"{
+                senderLabelText = "I said:"
+                senderColor = UIColor.purpleColor()
+            }
+            else{
+                senderLabelText = sender + " said:"
+                senderColor = UIColor.orangeColor()
+            }
+            
+            cell.detailTextLabel?.text = senderLabelText
+            cell.detailTextLabel?.textColor = senderColor
+        }
+        
+        if let message = currentMessage["message"] {
+            cell.textLabel?.text = message
+        }
+        
+        return cell
+    }
+    
+    
+    
+    // MARK: UITextFieldDelegate method implementation
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        let messageDictionary: [String: String] = ["message": textField.text!]
+        
+        if appDelegate.mpcHandler.sendData(dictionaryWithData: messageDictionary, toPeer: appDelegate.mpcHandler.session.connectedPeers[0] as MCPeerID){
+            
+            var dictionary: [String: String] = ["sender": "self", "message": textField.text!]
+            messagesArray.append(dictionary)
+            
+            self.updateTableview()
+        }
+        else{
+            print("Could not send data")
+        }
+        
+        textField.text = ""
+        
+        return true
+    }
+    
+    
+    // MARK: Custom method implementation
+    
+    func updateTableview(){
+        tblChat.reloadData()
+        
+        if self.tblChat.contentSize.height > self.tblChat.frame.size.height {
+            tblChat.scrollToRowAtIndexPath(NSIndexPath(forRow: messagesArray.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        }
+    }
+    
+    
+    func handleMPCReceivedDataWithNotification(notification: NSNotification) {
+        // Get the dictionary containing the data and the source peer from the notification.
+        let receivedDataDictionary = notification.object as! Dictionary<String, AnyObject>
+        
+        // "Extract" the data and the source peer from the received dictionary.
+        let data = receivedDataDictionary["data"] as? NSData
+        let fromPeer = receivedDataDictionary["fromPeer"] as! MCPeerID
+        
+        // Convert the data (NSData) into a Dictionary object.
+        let dataDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as! Dictionary<String, String>
+        
+        // Check if there's an entry with the "message" key.
+        if let message = dataDictionary["message"] {
+            // Make sure that the message is other than "_end_chat_".
+            if message != "_end_chat_"{
+                // Create a new dictionary and set the sender and the received message to it.
+                var messageDictionary: [String: String] = ["sender": fromPeer.displayName, "message": message]
+                
+                // Add this dictionary to the messagesArray array.
+                messagesArray.append(messageDictionary)
+                
+                // Reload the tableview data and scroll to the bottom using the main thread.
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                    self.updateTableview()
+                })
+            }
+            else{
+                // In this case an "_end_chat_" message was received.
+                // Show an alert view to the user.
+                let alert = UIAlertController(title: "", message: "\(fromPeer.displayName) ended this chat.", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                let doneAction: UIAlertAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+                    self.appDelegate.mpcHandler.session.disconnect()
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+                
+                alert.addAction(doneAction)
+                
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                    self.presentViewController(alert, animated: true, completion: nil)
+                })
+            }
+        }
+    }
 }

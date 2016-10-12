@@ -1,88 +1,144 @@
 //
-//  MPCHandler.swift
-//  SlitherSnakeTeamTart
+//  MPCManager.swift
+//  MPCRevisited
 //
-//  Created by 赵泽宇 on 16/10/11.
-//  Copyright © 2016年 Tart. All rights reserved.
+//  Created by Gabriel Theodoropoulos on 11/1/15.
+//  Copyright (c) 2015 Appcoda. All rights reserved.
 //
 
 import UIKit
 import MultipeerConnectivity
 
 
-class MPCHandler: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate{
+protocol MPCHandlerDelegate {
+    func foundPeer()
     
-    var peerID:MCPeerID!
-    var session:MCSession!
-    var browser:MCBrowserViewController!
-    var advertiser:MCAdvertiserAssistant? = nil
+    func lostPeer()
     
-    func setupPeerWithDisplayName (displayName:String){
-        peerID = MCPeerID(displayName: displayName)
-    }
+    func invitationWasReceived(fromPeer: String)
     
-    func setupSession(){
-        session = MCSession(peer: peerID)
-        session.delegate = self
-    }
+    func connectedWithPeer(peerID: MCPeerID)
+}
+
+
+class MPCHandler: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
     
-    func setupBrowser(){
-        browser = MCBrowserViewController(serviceType: "my-game", session: session)
+    var delegate: MPCHandlerDelegate?
+    
+    var session: MCSession!
+    
+    var peer: MCPeerID!
+    
+    var browser: MCNearbyServiceBrowser!
+    
+    var advertiser: MCNearbyServiceAdvertiser!
+    
+    var foundPeers = [MCPeerID]()
+    
+    var invitationHandler: ((Bool, MCSession!)->Void)!
+    
+    
+    override init() {
+        super.init()
         
+        peer = MCPeerID(displayName: UIDevice.currentDevice().name)
+        
+        session = MCSession(peer: peer)
+        session.delegate = self
+        
+        browser = MCNearbyServiceBrowser(peer: peer, serviceType: "appcoda-mpc")
+        browser.delegate = self
+        
+        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: nil, serviceType: "appcoda-mpc")
+        advertiser.delegate = self
     }
     
-    func advertiseSelf(advertise:Bool){
-        if advertise{
-            advertiser = MCAdvertiserAssistant(serviceType: "my-game", discoveryInfo: nil, session: session)
-            advertiser!.start()
-        }else{
-            advertiser!.stop()
-            advertiser = nil
+    
+    // MARK: MCNearbyServiceBrowserDelegate method implementation
+    
+    func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [String : String]?) {
+        foundPeers.append(peerID)
+        
+        delegate?.foundPeer()
+    }
+    
+    
+    func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        for (index, aPeer) in foundPeers.enumerate(){
+            if aPeer == peerID {
+                foundPeers.removeAtIndex(index)
+                break
+            }
+        }
+        
+        delegate?.lostPeer()
+    }
+    
+    
+    func browser(browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: NSError!) {
+        print(error.localizedDescription)
+    }
+    
+    
+    // MARK: MCNearbyServiceAdvertiserDelegate method implementation
+    
+    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData?, invitationHandler: ((Bool, MCSession?) -> Void)) {
+        self.invitationHandler = invitationHandler
+        
+        delegate?.invitationWasReceived(peerID.displayName)
+    }
+    
+    
+    func advertiser(advertiser: MCNearbyServiceAdvertiser!, didNotStartAdvertisingPeer error: NSError!) {
+        print(error.localizedDescription)
+    }
+    
+    
+    // MARK: MCSessionDelegate method implementation
+    
+    func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
+        switch state{
+        case MCSessionState.Connected:
+            print("Connected to session: \(session)")
+            delegate?.connectedWithPeer(peerID)
+            
+        case MCSessionState.Connecting:
+            print("Connecting to session: \(session)")
+            
+        default:
+            print("Did not connect to session: \(session)")
         }
     }
     
     
-    func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
-        let userInfo = ["peerID":peerID,"state":state.rawValue]
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            NSNotificationCenter.defaultCenter().postNotificationName("MPC_DidChangeStateNotification", object: nil, userInfo: userInfo)
-        })
-        
-    }
-    
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
-        let userInfo = ["data":data, "peerID":peerID]
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            NSNotificationCenter.defaultCenter().postNotificationName("MPC_DidReceiveDataNotification", object: nil, userInfo: userInfo)
-        })
-        
+        let dictionary: [String: AnyObject] = ["data": data, "fromPeer": peerID]
+        NSNotificationCenter.defaultCenter().postNotificationName("receivedMPCDataNotification", object: dictionary)
     }
     
     
-    func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
-        
-    }
+    func session(session: MCSession!, didStartReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!) { }
     
-    func session(session: MCSession!, didStartReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!) {
-        
-    }
+    func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) { }
     
-    func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) {
-        
-    }
-    
-    func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?){
-        
-    }
-    
-    // A nearby peer has stopped advertising.
-    func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID){
-        
-    }
-    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession?) -> Void){
-        
-    }
+    func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) { }
     
     
+    
+    // MARK: Custom method implementation
+    
+    func sendData(dictionaryWithData dictionary: Dictionary<String, String>, toPeer targetPeer: MCPeerID) -> Bool {
+        let dataToSend = NSKeyedArchiver.archivedDataWithRootObject(dictionary)
+        let peersArray = NSArray(object: targetPeer)
+       
+        do {
+            _ = try session.sendData(dataToSend, toPeers: peersArray as! [MCPeerID], withMode: MCSessionSendDataMode.Reliable)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            return false
+        }
+        
+        return true
+    }
     
 }

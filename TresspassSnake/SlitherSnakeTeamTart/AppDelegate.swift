@@ -12,11 +12,13 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var mpcHandler:MPCHandler = MPCHandler()
+    var mpcHandler: MPCHandler!
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        mpcHandler = MPCHandler()
         return true
     }
 
