@@ -9,12 +9,21 @@
 import UIKit
 
 struct MyVariables {
-    static var yourVariable = UIColor.redColor()
+    static var color = UIColor(
+        red: 0.5,
+        green: 0.5,
+        blue: 0.5,
+        alpha: 1.0)
+    static var red = CGFloat(0.5)
+    static var green = CGFloat(0.5)
+    static var blue = CGFloat(0.5)
 }
 
 class SettingViewController: UIViewController {
 
     
+    
+    @IBOutlet weak var testbutton: UILabel!
     
     var color: UIColor!
     @IBOutlet weak var mySampleColorButton: UIButton!
@@ -44,8 +53,14 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("SETTING view did load")
-        print(displayColors())
-        MyVariables.yourVariable = displayColors()
+        print(MyVariables.red)
+        print(MyVariables.green)
+        print(MyVariables.blue)
+        testbutton.backgroundColor = UIColor(
+            red: MyVariables.red,
+            green: MyVariables.green,
+            blue: MyVariables.blue,
+            alpha: 1.0)
         
 
         // Do any additional setup after loading the view.
@@ -53,21 +68,26 @@ class SettingViewController: UIViewController {
     
     
     func displayColors() -> UIColor{
-        let red = CGFloat(redcolor.value)
-        let blue = CGFloat(bluecolor.value)
-        let green = CGFloat(greencolor.value)
-        let color = UIColor(
-            red: red,
-            green: green,
-            blue: blue,
+        MyVariables.red = CGFloat(redcolor.value)
+        MyVariables.blue = CGFloat(bluecolor.value)
+        MyVariables.green = CGFloat(greencolor.value)
+        MyVariables.color = UIColor(
+            red: MyVariables.red,
+            green: MyVariables.green,
+            blue: MyVariables.blue,
             alpha: 1.0)
-        if colorsetting.selectedSegmentIndex == 0 {
-            mySampleColorLabel.backgroundColor = color
-        } else {
-            
-            mySampleColorLabel.textColor = color
-        }
-        return color
+        mySampleColorLabel.backgroundColor = UIColor(
+            red: MyVariables.red,
+            green: MyVariables.green,
+            blue: MyVariables.blue,
+            alpha: 1.0)
+    
+        print(MyVariables.red)
+        print(MyVariables.green)
+        print(MyVariables.blue)
+
+            return MyVariables.color
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {

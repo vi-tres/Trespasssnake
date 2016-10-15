@@ -19,6 +19,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Single View did load")
+        print(MyVariables.red)
+        print(MyVariables.green)
+        print(MyVariables.blue)
+
         
         
         // Do any additional setup after loading the view.
@@ -33,7 +37,7 @@ class ViewController: UIViewController {
         let secondVC = segue.destinationViewController as! GameViewController
         secondVC.PlayerName = textField.text!
         print("Single prepareForSegue View did load")
-        print(MyVariables.yourVariable)
+        print(MyVariables.color)
         
     }
 

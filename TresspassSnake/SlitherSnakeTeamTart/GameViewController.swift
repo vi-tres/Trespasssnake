@@ -13,6 +13,7 @@ class GameViewController: UIViewController {
     
     var PlayerName = ""
     var SnakeColor: UIColor!
+    
 
     override func viewDidLoad() {
         

@@ -40,7 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var enemys:Array<Array<SKShapeNode>>!=[]
     var enemy:Array<SKShapeNode>!
     var playername = " "
-    var snakecolor = MyVariables.yourVariable
+    var snakecolor = MyVariables.color
 
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -104,7 +104,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         let eye1 = SKShapeNode.init(circleOfRadius: 3)
         let eye2 = SKShapeNode.init(circleOfRadius: 3)
         print("CREATSNAKE")
-        head.fillColor=UIColor.redColor()
+        head.fillColor=snakecolor
         head.addChild(eye1)
         head.addChild(eye2)
         eye1.position = CGPoint.init(x: eye1.parent!.position.x+10, y: eye1.parent!.position.y+5)
@@ -132,7 +132,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             let a = SKShapeNode.init(circleOfRadius: 10);
             a.position = CGPoint(x: head.position.x+(CGFloat(i)*dir.x*10), y:head.position.y+(CGFloat(i)*dir.y*10))
             
-            a.fillColor = snakecolor
+            a.fillColor = UIColor(
+                red: MyVariables.red,
+                green: MyVariables.green,
+                blue: MyVariables.blue,
+                alpha: 1.0)
+
             self.addChild(a)
             Player.append(a)
         }
@@ -267,7 +272,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     func extendLength(Player:Array<SKShapeNode>) -> Array<SKShapeNode> {
         var player = Player
         let a = SKShapeNode.init(circleOfRadius: 10);
-        a.fillColor=UIColor.blackColor()
+        a.fillColor=UIColor(
+            red: MyVariables.red,
+            green: MyVariables.green,
+            blue: MyVariables.blue,
+            alpha: 1.0)
+
         a.position = CGPoint(x: 2*player[player.endIndex-1].position.x-player[player.endIndex-2].position.x, y:2*player[player.endIndex-1].position.y-player[player.endIndex-2].position.y)
         self.addChild(a)
         player.append(a)

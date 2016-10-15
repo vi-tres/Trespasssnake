@@ -70,6 +70,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9l3-Z3-Osr">
+                                <frame key="frameInset" minX="313" minY="122" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -80,11 +87,12 @@
                         <outlet property="greencolor" destination="gL8-C7-hO3" id="BcW-kh-SdN"/>
                         <outlet property="mySampleColorLabel" destination="KsB-u2-A6n" id="mj3-Xj-Vyi"/>
                         <outlet property="redcolor" destination="Ogj-AP-gyh" id="bda-J3-SqJ"/>
+                        <outlet property="testbutton" destination="9l3-Z3-Osr" id="6D0-kO-1Fa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oke-mz-DIN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="128" y="396"/>
+            <point key="canvasLocation" x="128" y="395.80209895052479"/>
         </scene>
         <!--Item-->
         <scene sceneID="KtR-of-KrQ">
@@ -353,11 +361,11 @@
                                         <rect key="frame" x="0.0" y="22" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xgs-K2-S5m" id="6MY-hV-wbr">
-                                            <frame key="frameInset" width="320" height="79.5"/>
+                                            <frame key="frameInset" width="320" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pgb-Nd-sxS">
-                                                    <frame key="frameInset" minX="15" width="290" height="79.5"/>
+                                                    <frame key="frameInset" minX="15" width="290" height="79"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -468,7 +476,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Faw-0l-JhV">
-                                                    <frame key="frameInset" minX="15" minY="24" width="31.5" height="19.5"/>
+                                                    <frame key="frameInset" minX="15" minY="23" width="32" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -478,7 +486,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4FL-gB-0hZ">
-                                                    <frame key="frameInset" minX="15" minY="43.5" width="30.5" height="13.5"/>
+                                                    <frame key="frameInset" minX="15" minY="43" width="31" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
