@@ -36,6 +36,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var mine:Array<SKShapeNode>!
     var fruits:Array<SKShapeNode>!=[]
     var fruit :SKShapeNode!
+    var returnFruits :SKShapeNode!
     var enemys:Array<Array<SKShapeNode>>!=[]
     var enemy:Array<SKShapeNode>!
     var playername = " "
@@ -55,7 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         ScoreLbl=UILabel(frame:CGRect(x:100,y:0,width: 100,height: 50))
         ScoreLbl.textColor=UIColor.whiteColor()
         ScoreLbl.backgroundColor=UIColor.grayColor()
-        ScoreLbl.text="Score: "
+        ScoreLbl.text="Score: 0"
         self.view?.addSubview(ScoreLbl)
         
         //Setup playername label
@@ -93,11 +94,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
         
         //set initial camera start position
-        if #available(iOS 9.0, *) {
-            theCamera.position = CGPoint(x: self.mine[0].position.x - self.frame.midX/2, y: self.mine[0].position.y)
-        } else {
-            // Fallback on earlier versions
-        }
+        theCamera.position = CGPoint(x: self.mine[0].position.x - self.frame.midX/2, y: self.mine[0].position.y)
     }
     
     func createSnake(posi: CGPoint, dir :CGPoint)->Array<SKShapeNode>
@@ -185,17 +182,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     func fruitsPopup(posi:CGPoint)->SKShapeNode{
         //get ball's image randomly from the array
         //let array=["apple.png","banana.png","strawberry.png","cherry.png"]
-        //let randomIndex = Int(arc4random_uniform(UInt32(array.count)))
-        //let fruit=SKSpriteNode(imageNamed:array[randomIndex])
-        let fruit = SKShapeNode.init(circleOfRadius: 10)
+        let randomIndex = CGFloat(arc4random_uniform(UInt32(10-3)))
+        let fruit = SKShapeNode.init(circleOfRadius: randomIndex)
         fruit.position = posi
         fruit.fillColor = UIColor.yellowColor()
         self.addChild(fruit)
         //get balls at random position
-        //let MinValue=self.size.width/8
-        //let MaxValue=self.size.width-150
-        //let Point=UInt32(MaxValue-MinValue)
-        //fruit.position=CGPoint(x:CGFloat(arc4random_uniform(Point)),y:(CGFloat(arc4random_uniform(Point))))
+        let MinValue=self.size.width/8
+        let MaxValue=self.size.width-150
+        let Point=UInt32(MaxValue-MinValue)
+        fruit.position=CGPoint(x:CGFloat(arc4random_uniform(Point)),y:(CGFloat(arc4random_uniform(Point))))
 
         return fruit
     }
@@ -260,9 +256,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                 fruitsReturn.removeAtIndex(fruits.indexOf(fruit)!)
                 fruit.removeFromParent()
                 
-                Score += 1
-                ScoreLbl.text="Score: "+"\(Score)"
-                
+                //Score += 1
+                //ScoreLbl.text="Score: "+"\(Score)"
             }
         }
         return fruitsReturn
@@ -311,7 +306,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             self.snakeMove(enemy, dir: adir[i])
             let fruitLength = Score
             fruits = self.eatFruits(enemy, fruits: fruits)
+            /*if(self.eatFruits(self.mine: , fruits: fruits)==true){
+                Score += 1
+                ScoreLbl.text="Score: "+"\(Score)"
+                
+            }*/
             let pScore = Score
+            
             if ((!(fruitLength == pScore)))
             {
                 enemy = self.extendLength(enemy)
@@ -337,6 +338,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                 for t:Int in Range.init(start: 0, end: enemys[i].count)
                 {
                     enemys[i][t].removeFromParent();
+                    returnFruits = fruitsPopup(CGPoint(x: CGFloat(arc4random()%1000)+enemys[i][t].position.x, y: enemys[i][t].position.y+CGFloat(arc4random()%1000)))
+                    
+                    fruits.append(returnFruits)
                     
                 }
                 enemys.removeAtIndex(i)
@@ -351,17 +355,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         if ((!(fruitLength==fruitLength1)))
         {
+            //User score+1
+            Score+=1
+            ScoreLbl.text="Score: "+"\(Score)"
+            
             self.mine = self.extendLength(self.mine)
         }
         //reset camera position
-        if #available(iOS 9.0, *) {
-            theCamera.position = CGPoint(x: self.mine[0].position.x - self.frame.midX/2, y: self.mine[0].position.y)
-        } else {
-            // Fallback on earlier versions
-        }
+        theCamera.position=self.mine[0].position
+        
+        //if user die, jump to game end scene
         if(snakeDie(self.mine, othershes: enemys))
         {
-            mine[0].fillColor = UIColor.greenColor()
+            self.view?.presentScene(EndScene())
         }
         count = count + 1
         if(count == 10)
