@@ -94,7 +94,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
         
         //set initial camera start position
-        theCamera.position = CGPoint(x: self.mine[0].position.x - self.frame.midX/2, y: self.mine[0].position.y)
+        if #available(iOS 9.0, *) {
+            theCamera.position = CGPoint(x: self.mine[0].position.x - self.frame.midX/2, y: self.mine[0].position.y)
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     func createSnake(posi: CGPoint, dir :CGPoint)->Array<SKShapeNode>
@@ -372,7 +376,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             self.mine = self.extendLength(self.mine)
         }
         //reset camera position
-        theCamera.position=self.mine[0].position
+        if #available(iOS 9.0, *) {
+            theCamera.position=self.mine[0].position
+        } else {
+            // Fallback on earlier versions
+        }
         
         //if user die, jump to game end scene
         if(snakeDie(self.mine, othershes: enemys))
