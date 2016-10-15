@@ -19,7 +19,7 @@
                     <view key="view" contentMode="scaleToFill" id="bVt-WT-csZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Setting" id="W7Y-A4-NXc"/>
                 </viewController>
@@ -71,7 +71,7 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Viz-uT-jEg" customClass="GADBannerView">
                                 <frame key="frameInset" minX="12" minY="10" width="350" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QfE-Jf-dPG">
                                 <frame key="frameInset" minX="323" minY="53" width="39" height="30"/>
@@ -79,7 +79,7 @@
                                 <state key="normal" title="Close"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="New Game" id="IA3-xm-5Ss"/>
                     <connections>
@@ -98,7 +98,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="dYn-X8-kvJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="SZ9-a4-BmD" kind="relationship" relationship="viewControllers" id="lVP-wM-eoS"/>
@@ -164,7 +164,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="GFV-Xi-Rc0"/>
                     <connections>
@@ -190,7 +190,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rGB-bc-fyw" customClass="TableView" customModule="SlitherSnakeTeamTart" customModuleProvider="target">
                                 <frame key="frameInset" minY="72" width="375" height="507"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Px7-xy-Eie">
                                 <frame key="frameInset" minX="133" minY="587" width="108" height="40"/>
@@ -199,7 +199,7 @@
                                 <state key="normal" title="Start"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="OIQ-wp-aW9">
                         <barButtonItem key="leftBarButtonItem" title="Invite Player" id="6mw-vt-eED">
@@ -326,13 +326,13 @@
                                 <exclude reference="VUT-7K-HfL"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="fwj-vU-bLq"/>
-                                <exclude reference="DpE-e7-XzR"/>
-                                <exclude reference="fM2-bg-iAh"/>
-                                <exclude reference="KTb-Rd-jHB"/>
                                 <exclude reference="6qW-mZ-pzZ"/>
-                                <exclude reference="wvW-px-HgB"/>
+                                <exclude reference="DpE-e7-XzR"/>
+                                <exclude reference="KTb-Rd-jHB"/>
+                                <exclude reference="fM2-bg-iAh"/>
+                                <exclude reference="fwj-vU-bLq"/>
                                 <exclude reference="vCv-Vc-SYM"/>
+                                <exclude reference="wvW-px-HgB"/>
                                 <exclude reference="2db-dw-UG5"/>
                             </mask>
                         </variation>
@@ -342,13 +342,13 @@
                                 <include reference="VUT-7K-HfL"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="fwj-vU-bLq"/>
-                                <include reference="DpE-e7-XzR"/>
-                                <include reference="fM2-bg-iAh"/>
-                                <include reference="KTb-Rd-jHB"/>
                                 <include reference="6qW-mZ-pzZ"/>
-                                <include reference="wvW-px-HgB"/>
+                                <include reference="DpE-e7-XzR"/>
+                                <include reference="KTb-Rd-jHB"/>
+                                <include reference="fM2-bg-iAh"/>
+                                <include reference="fwj-vU-bLq"/>
                                 <include reference="vCv-Vc-SYM"/>
+                                <include reference="wvW-px-HgB"/>
                                 <include reference="2db-dw-UG5"/>
                             </mask>
                         </variation>
@@ -470,13 +470,13 @@
                                 <exclude reference="AXB-TE-SQZ"/>
                                 <exclude reference="E2Y-rq-Jxq"/>
                                 <exclude reference="byK-BW-uOj"/>
-                                <exclude reference="9HR-MN-9p6"/>
                                 <exclude reference="7Mn-qM-E8E"/>
+                                <exclude reference="9HR-MN-9p6"/>
                                 <exclude reference="FdU-9B-t3g"/>
-                                <exclude reference="W6f-Hk-555"/>
+                                <exclude reference="0hz-0c-KPh"/>
                                 <exclude reference="6rA-Kp-uPt"/>
                                 <exclude reference="FLB-fN-5ye"/>
-                                <exclude reference="0hz-0c-KPh"/>
+                                <exclude reference="W6f-Hk-555"/>
                                 <exclude reference="c1K-Kq-6Vx"/>
                             </mask>
                         </variation>
@@ -490,13 +490,13 @@
                                 <include reference="AXB-TE-SQZ"/>
                                 <include reference="E2Y-rq-Jxq"/>
                                 <include reference="byK-BW-uOj"/>
-                                <include reference="9HR-MN-9p6"/>
                                 <include reference="7Mn-qM-E8E"/>
+                                <include reference="9HR-MN-9p6"/>
                                 <include reference="FdU-9B-t3g"/>
-                                <include reference="W6f-Hk-555"/>
+                                <include reference="0hz-0c-KPh"/>
                                 <include reference="6rA-Kp-uPt"/>
                                 <include reference="FLB-fN-5ye"/>
-                                <include reference="0hz-0c-KPh"/>
+                                <include reference="W6f-Hk-555"/>
                                 <include reference="c1K-Kq-6Vx"/>
                             </mask>
                         </variation>
