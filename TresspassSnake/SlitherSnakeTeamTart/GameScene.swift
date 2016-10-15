@@ -104,9 +104,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     func createSnake(posi: CGPoint, dir :CGPoint)->Array<SKShapeNode>
     {
         //snake initialise
-        let head = SKShapeNode.init(circleOfRadius: 10)
+        if(MyVariables.mode == 1){
+       let head = SKShapeNode.init(circleOfRadius: 10)
         let eye1 = SKShapeNode.init(circleOfRadius: 3)
-        let eye2 = SKShapeNode.init(circleOfRadius: 3)
+            let eye2 = SKShapeNode.init(circleOfRadius: 3)
+        //let head = SKShapeNode(rectOfSize: CGSize(width: 20, height: 20))
+        
         print("CREATSNAKE")
         head.fillColor=snakecolor
         head.addChild(eye1)
@@ -144,7 +147,51 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
 
             self.addChild(a)
             Player.append(a)
-        }
+            }}
+        else{
+            let head = SKShapeNode(rectOfSize: CGSize(width: 20, height: 20))
+            let eye1 = SKShapeNode.init(circleOfRadius: 3)
+            let eye2 = SKShapeNode.init(circleOfRadius: 3)
+            //let head = SKShapeNode(rectOfSize: CGSize(width: 20, height: 20))
+            
+            print("CREATSNAKE")
+            head.fillColor=snakecolor
+            head.addChild(eye1)
+            head.addChild(eye2)
+            eye1.position = CGPoint.init(x: eye1.parent!.position.x+10, y: eye1.parent!.position.y+5)
+            eye1.fillColor = UIColor.blackColor()
+            eye2.position = CGPoint.init(x: eye2.parent!.position.x+10, y: eye2.parent!.position.y-5)
+            eye2.fillColor = UIColor.blackColor()
+            head.position = posi;
+            self.addChild(head)
+            Player.append(head)
+            head.position = CGPoint(x: self.size.width/2.0, y: self.size.height/2.0)
+            
+            if(dir.x>0)
+            {
+                let action = SKAction.rotateToAngle(atan(dir.y/dir.x), duration: 0);
+                head.runAction(action)
+            }else
+            {
+                let action = SKAction.rotateToAngle(atan(dir.y/dir.x)+3.14159, duration: 0);
+                head.runAction(action)
+            }
+            print("CREATSNAKEColor")
+            print("SNAKECOLOR")
+            for i:Int in Range(start: 1, end: 5)
+            {
+                let a = SKShapeNode(rectOfSize: CGSize(width: 20, height: 20));
+                a.position = CGPoint(x: head.position.x+(CGFloat(i)*dir.x*10), y:head.position.y+(CGFloat(i)*dir.y*10))
+                
+                a.fillColor = UIColor(
+                    red: MyVariables.red,
+                    green: MyVariables.green,
+                    blue: MyVariables.blue,
+                    alpha: 1.0)
+                
+                self.addChild(a)
+                Player.append(a)
+            }}
 
         return Player
     }
@@ -275,7 +322,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     //snake extends length
     func extendLength(Player:Array<SKShapeNode>) -> Array<SKShapeNode> {
         var player = Player
-        let a = SKShapeNode.init(circleOfRadius: 10);
+        if(MyVariables.mode == 1){let a = SKShapeNode.init(circleOfRadius: 10);
         a.fillColor=UIColor(
             red: MyVariables.red,
             green: MyVariables.green,
@@ -284,7 +331,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
 
         a.position = CGPoint(x: 2*player[player.endIndex-1].position.x-player[player.endIndex-2].position.x, y:2*player[player.endIndex-1].position.y-player[player.endIndex-2].position.y)
         self.addChild(a)
-        player.append(a)
+            player.append(a)}
+        else{let a = SKShapeNode(rectOfSize: CGSize(width: 20, height: 20));
+            a.fillColor=UIColor(
+                red: MyVariables.red,
+                green: MyVariables.green,
+                blue: MyVariables.blue,
+                alpha: 1.0)
+            
+            a.position = CGPoint(x: 2*player[player.endIndex-1].position.x-player[player.endIndex-2].position.x, y:2*player[player.endIndex-1].position.y-player[player.endIndex-2].position.y)
+            self.addChild(a)
+            player.append(a)}
         return player
     }
     

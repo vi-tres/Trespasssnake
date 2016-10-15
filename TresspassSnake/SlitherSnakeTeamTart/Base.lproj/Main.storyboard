@@ -21,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ogj-AP-gyh">
-                                <frame key="frameInset" minX="57" minY="220" width="311" height="31"/>
+                                <frame key="frameInset" minX="57" minY="185" width="311" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="redcolorchange:" destination="Fdw-qv-0SO" eventType="valueChanged" id="ari-7d-20S"/>
@@ -35,21 +35,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KsB-u2-A6n">
-                                <frame key="frameInset" minX="122" minY="122" width="155" height="67"/>
+                                <frame key="frameInset" minX="135" minY="110" width="155" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gL8-C7-hO3">
-                                <frame key="frameInset" minX="57" minY="275" width="311" height="31"/>
+                                <frame key="frameInset" minX="57" minY="239" width="311" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="greencolorchange:" destination="Fdw-qv-0SO" eventType="valueChanged" id="Aog-6J-aLo"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ito-hj-fWf">
-                                <frame key="frameInset" minX="57" minY="322" width="311" height="31"/>
+                                <frame key="frameInset" minX="57" minY="291" width="311" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="bluecolorchange:" destination="Fdw-qv-0SO" eventType="valueChanged" id="cJk-UP-8lQ"/>
@@ -70,6 +70,29 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create Snake Texture" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BuA-Aj-dxn">
+                                <frame key="frameInset" minX="100" minY="329" width="225" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Sb-h0-Czh">
+                                <frame key="frameInset" minX="100" minY="384" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Mode1"/>
+                                <connections>
+                                    <action selector="choosemode1:" destination="Fdw-qv-0SO" eventType="touchUpInside" id="NRd-J0-y6d"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KzL-yp-AaQ">
+                                <frame key="frameInset" minX="243" minY="384" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Mode2"/>
+                                <connections>
+                                    <action selector="changemode2:" destination="Fdw-qv-0SO" eventType="touchUpInside" id="RCo-SX-yra"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -78,6 +101,8 @@
                         <outlet property="bluecolor" destination="Ito-hj-fWf" id="i8D-Jk-G5i"/>
                         <outlet property="colorsetting" destination="NQA-IB-Njv" id="gJM-VH-BDE"/>
                         <outlet property="greencolor" destination="gL8-C7-hO3" id="BcW-kh-SdN"/>
+                        <outlet property="mode1" destination="1Sb-h0-Czh" id="AGg-9Y-nNb"/>
+                        <outlet property="mode2" destination="KzL-yp-AaQ" id="Fol-dr-Ef0"/>
                         <outlet property="mySampleColorLabel" destination="KsB-u2-A6n" id="mj3-Xj-Vyi"/>
                         <outlet property="redcolor" destination="Ogj-AP-gyh" id="bda-J3-SqJ"/>
                     </connections>

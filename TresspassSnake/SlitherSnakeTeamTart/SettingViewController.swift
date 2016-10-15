@@ -17,14 +17,19 @@ struct MyVariables {
     static var red = CGFloat(0.5)
     static var green = CGFloat(0.5)
     static var blue = CGFloat(0.5)
+    static var mode = 1
 }
 
 class SettingViewController: UIViewController {
 
     
     
-    @IBOutlet weak var testbutton: UILabel!
+   
     
+    @IBOutlet weak var mode1: UIButton!
+    
+    
+    @IBOutlet weak var mode2: UIButton!
     var color: UIColor!
     @IBOutlet weak var mySampleColorButton: UIButton!
     
@@ -50,17 +55,21 @@ class SettingViewController: UIViewController {
 
     }
     
+    @IBAction func choosemode1(sender: AnyObject) {
+        
+    }
+    
+    
+    @IBAction func changemode2(sender: AnyObject) {
+        MyVariables.mode = 2
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         print("SETTING view did load")
         print(MyVariables.red)
         print(MyVariables.green)
         print(MyVariables.blue)
-        testbutton.backgroundColor = UIColor(
-            red: MyVariables.red,
-            green: MyVariables.green,
-            blue: MyVariables.blue,
-            alpha: 1.0)
+        
         
 
         // Do any additional setup after loading the view.
