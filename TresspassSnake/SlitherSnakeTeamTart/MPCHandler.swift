@@ -1,4 +1,4 @@
-//
+ //
 //  MPCManager.swift
 //  MPCRevisited
 //
@@ -21,7 +21,8 @@ protocol MPCHandlerDelegate {
 }
 
 
-class MPCHandler: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
+class MPCHandler: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate//MCNearbyServiceAdvertiserDelegate
+{
     
     var delegate: MPCHandlerDelegate?
     
@@ -50,7 +51,7 @@ class MPCHandler: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         browser.delegate = self
         
         advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: nil, serviceType: "appcoda-mpc")
-        advertiser.delegate = self
+        //advertiser.delegate = self
     }
     
     
@@ -82,12 +83,17 @@ class MPCHandler: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     
     // MARK: MCNearbyServiceAdvertiserDelegate method implementation
     
-    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData?, invitationHandler: ((Bool, MCSession?) -> Void)) {
+    /**func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData?, invitationHandler: ((Bool, MCSession?) -> Void)) {
+        self.invitationHandler = invitationHandler
+        
+        delegate?.invitationWasReceived(peerID.displayName)
+    }**/
+    
+    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession!) -> Void){
         self.invitationHandler = invitationHandler
         
         delegate?.invitationWasReceived(peerID.displayName)
     }
-    
     
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didNotStartAdvertisingPeer error: NSError!) {
         print(error.localizedDescription)

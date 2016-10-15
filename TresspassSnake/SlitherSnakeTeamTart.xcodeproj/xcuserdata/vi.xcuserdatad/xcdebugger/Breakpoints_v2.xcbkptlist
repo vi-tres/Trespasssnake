@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "249"
             endingLineNumber = "249"
-            landmarkName = "extendLength(_:)"
+            landmarkName = "eatFruits(_:fruits:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -79,7 +79,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "157"
             endingLineNumber = "157"
-            landmarkName = "fruitsPopup(_:)"
+            landmarkName = "creatEnemySnake(_:dir:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
