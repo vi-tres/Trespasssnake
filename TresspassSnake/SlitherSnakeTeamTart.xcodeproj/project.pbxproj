@@ -44,6 +44,7 @@
 		C1D4CEF91DACD6F900096186 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D4CEF81DACD6F900096186 /* ViewController.swift */; };
 		C1D4CEFB1DACF3BD00096186 /* MPCHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D4CEFA1DACF3BD00096186 /* MPCHandler.swift */; };
 		C1D4CEFF1DACFA3500096186 /* MultipleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D4CEFE1DACFA3500096186 /* MultipleViewController.swift */; };
+		C1FB54FA1DB214990098C016 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB54F91DB214990098C016 /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		C1D4CEF81DACD6F900096186 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C1D4CEFA1DACF3BD00096186 /* MPCHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCHandler.swift; sourceTree = "<group>"; };
 		C1D4CEFE1DACFA3500096186 /* MultipleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleViewController.swift; sourceTree = "<group>"; };
+		C1FB54F91DB214990098C016 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 				14F599631D83E3DF00780E84 /* shapesBG.png */,
 				14F5992D1D83CAC100780E84 /* Main.storyboard */,
 				C185D39B1DB1E2D500BBFCB8 /* loge.png */,
+				C1FB54F91DB214990098C016 /* SettingViewController.swift */,
 				C1B93AB71DADBDB6001511CD /* InviteViewController.swift */,
 				C1D4CEFE1DACFA3500096186 /* MultipleViewController.swift */,
 				C1D4CEFA1DACF3BD00096186 /* MPCHandler.swift */,
@@ -384,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14F599661D83E65B00780E84 /* Snake.swift in Sources */,
+				C1FB54FA1DB214990098C016 /* SettingViewController.swift in Sources */,
 				C1D4CEFB1DACF3BD00096186 /* MPCHandler.swift in Sources */,
 				14F5992A1D83CAC100780E84 /* GameScene.swift in Sources */,
 				C1D4CEFF1DACFA3500096186 /* MultipleViewController.swift in Sources */,

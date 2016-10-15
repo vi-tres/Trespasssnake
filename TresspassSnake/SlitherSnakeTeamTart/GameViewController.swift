@@ -12,6 +12,7 @@ import SpriteKit
 class GameViewController: UIViewController {
     
     var PlayerName = ""
+    var SnakeColor: UIColor!
 
     override func viewDidLoad() {
         
@@ -31,6 +32,7 @@ class GameViewController: UIViewController {
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
             scene.playername = PlayerName
+            //scene.snakecolor = Variables.coinsVariable
             scene.backgroundColor = UIColor.greenColor()
             
             skView.presentScene(scene)

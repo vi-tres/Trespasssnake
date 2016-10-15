@@ -9,13 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    
 
     @IBOutlet weak var textField: UITextField!
     
    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Single View did load")
+        
         
         // Do any additional setup after loading the view.
     }
@@ -28,6 +32,8 @@ class ViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         let secondVC = segue.destinationViewController as! GameViewController
         secondVC.PlayerName = textField.text!
+        print("Single prepareForSegue View did load")
+        print(MyVariables.yourVariable)
         
     }
 

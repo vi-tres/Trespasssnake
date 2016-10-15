@@ -21,6 +21,7 @@ var ScoreLbl=UILabel()
 
 var PlayerLabel=UILabel()
 
+
 var mydir:CGPoint = CGPoint(x:1,y:0)
 var adir:Array<CGPoint>! = []
 
@@ -38,10 +39,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var enemys:Array<Array<SKShapeNode>>!=[]
     var enemy:Array<SKShapeNode>!
     var playername = " "
-    
+    var snakecolor = MyVariables.yourVariable
+
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        
+        print("snakecolor")
+        print("playername")
+        print(playername)
         if #available(iOS 9.0, *) {
             self.camera=theCamera
         } else {
@@ -102,6 +106,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         let head = SKShapeNode.init(circleOfRadius: 10)
         let eye1 = SKShapeNode.init(circleOfRadius: 3)
         let eye2 = SKShapeNode.init(circleOfRadius: 3)
+        print("CREATSNAKE")
         head.fillColor=UIColor.redColor()
         head.addChild(eye1)
         head.addChild(eye2)
@@ -123,11 +128,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             let action = SKAction.rotateToAngle(atan(dir.y/dir.x)+3.14159, duration: 0);
             head.runAction(action)
         }
+        print("CREATSNAKEColor")
+        print("SNAKECOLOR")
         for i:Int in Range(start: 1, end: 5)
         {
             let a = SKShapeNode.init(circleOfRadius: 10);
             a.position = CGPoint(x: head.position.x+(CGFloat(i)*dir.x*10), y:head.position.y+(CGFloat(i)*dir.y*10))
-            a.fillColor = UIColor.redColor();
+            
+            a.fillColor = snakecolor
             self.addChild(a)
             Player.append(a)
         }
