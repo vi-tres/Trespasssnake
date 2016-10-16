@@ -22,7 +22,11 @@ struct MyVariables {
 
 class SettingViewController: UIViewController {
 
+    @IBOutlet weak var circle: UIImageView!
     
+    @IBOutlet weak var square: UIImageView!
+    
+    @IBOutlet weak var snakecolor: UIImageView!
     
    
     
@@ -31,9 +35,7 @@ class SettingViewController: UIViewController {
     
     @IBOutlet weak var mode2: UIButton!
     var color: UIColor!
-    @IBOutlet weak var mySampleColorButton: UIButton!
     
-    @IBOutlet weak var mySampleColorLabel: UILabel!
     @IBOutlet weak var redcolor: UISlider!
     @IBOutlet weak var bluecolor: UISlider!
     @IBOutlet weak var greencolor: UISlider!
@@ -57,11 +59,25 @@ class SettingViewController: UIViewController {
     
     @IBAction func choosemode1(sender: AnyObject) {
         
+        circle.image = circle.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        circle.tintColor = UIColor(
+            red: MyVariables.red,
+            green: MyVariables.green,
+            blue: MyVariables.blue,
+            alpha: 1.0)
+        
     }
+    
     
     
     @IBAction func changemode2(sender: AnyObject) {
         MyVariables.mode = 2
+        square.image = square.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        square.tintColor = UIColor(
+            red: MyVariables.red,
+            green: MyVariables.green,
+            blue: MyVariables.blue,
+            alpha: 1.0)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +85,7 @@ class SettingViewController: UIViewController {
         print(MyVariables.red)
         print(MyVariables.green)
         print(MyVariables.blue)
+        
         
         
 
@@ -85,19 +102,20 @@ class SettingViewController: UIViewController {
             green: MyVariables.green,
             blue: MyVariables.blue,
             alpha: 1.0)
-        mySampleColorLabel.backgroundColor = UIColor(
+
+        
+        snakecolor.image = snakecolor.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        snakecolor.tintColor = UIColor(
             red: MyVariables.red,
             green: MyVariables.green,
             blue: MyVariables.blue,
             alpha: 1.0)
-    
-        print(MyVariables.red)
-        print(MyVariables.green)
-        print(MyVariables.blue)
-
+        
             return MyVariables.color
         
     }
+    
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         print("SettingprepareForSegue did load")

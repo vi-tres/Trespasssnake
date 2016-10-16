@@ -34,13 +34,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KsB-u2-A6n">
-                                <frame key="frameInset" minX="135" minY="110" width="155" height="67"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gL8-C7-hO3">
                                 <frame key="frameInset" minX="57" minY="239" width="311" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -78,17 +71,31 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Sb-h0-Czh">
-                                <frame key="frameInset" minX="100" minY="384" width="46" height="30"/>
+                                <frame key="frameInset" minX="72" minY="443" width="99" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Mode1"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Circle"/>
                                 <connections>
                                     <action selector="choosemode1:" destination="Fdw-qv-0SO" eventType="touchUpInside" id="NRd-J0-y6d"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KzL-yp-AaQ">
-                                <frame key="frameInset" minX="243" minY="384" width="48" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="snake-skin.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gmt-IY-I4O">
+                                <frame key="frameInset" minX="90" minY="117" width="218" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Mode2"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle" translatesAutoresizingMaskIntoConstraints="NO" id="h5O-Bz-a4G">
+                                <frame key="frameInset" minX="90" minY="381" width="62" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="square" translatesAutoresizingMaskIntoConstraints="NO" id="iJZ-1D-sBe">
+                                <frame key="frameInset" minX="246" minY="381" width="62" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KzL-yp-AaQ">
+                                <frame key="frameInset" minX="245" minY="449" width="64" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Square"/>
                                 <connections>
                                     <action selector="changemode2:" destination="Fdw-qv-0SO" eventType="touchUpInside" id="RCo-SX-yra"/>
                                 </connections>
@@ -99,12 +106,14 @@
                     <tabBarItem key="tabBarItem" title="Setting" id="wmT-aa-AuK"/>
                     <connections>
                         <outlet property="bluecolor" destination="Ito-hj-fWf" id="i8D-Jk-G5i"/>
+                        <outlet property="circle" destination="h5O-Bz-a4G" id="cR1-sG-4sw"/>
                         <outlet property="colorsetting" destination="NQA-IB-Njv" id="gJM-VH-BDE"/>
                         <outlet property="greencolor" destination="gL8-C7-hO3" id="BcW-kh-SdN"/>
                         <outlet property="mode1" destination="1Sb-h0-Czh" id="AGg-9Y-nNb"/>
                         <outlet property="mode2" destination="KzL-yp-AaQ" id="Fol-dr-Ef0"/>
-                        <outlet property="mySampleColorLabel" destination="KsB-u2-A6n" id="mj3-Xj-Vyi"/>
                         <outlet property="redcolor" destination="Ogj-AP-gyh" id="bda-J3-SqJ"/>
+                        <outlet property="snakecolor" destination="Gmt-IY-I4O" id="eGM-5K-6CT"/>
+                        <outlet property="square" destination="iJZ-1D-sBe" id="VM4-yl-D0B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oke-mz-DIN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -629,10 +638,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="circle" width="1253" height="1167"/>
         <image name="loge.png" width="450" height="450"/>
+        <image name="snake-skin.png" width="302" height="54"/>
+        <image name="square" width="315" height="308"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="asU-Ba-Jg9"/>
+        <segue reference="UoY-h7-DO8"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
