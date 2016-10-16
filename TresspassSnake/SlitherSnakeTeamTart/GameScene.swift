@@ -42,7 +42,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var playername = " "
     var snakecolor = MyVariables.color
 
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         /* Setup your scene here */
         print("snakecolor")
         print("playername")
@@ -54,17 +54,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
         //Setup score label
         ScoreLbl=UILabel(frame:CGRect(x:100,y:0,width: 100,height: 50))
-        ScoreLbl.textColor=UIColor.whiteColor()
-        ScoreLbl.backgroundColor=UIColor.grayColor()
+        ScoreLbl.textColor=UIColor.white
+        ScoreLbl.backgroundColor=UIColor.gray
         ScoreLbl.text="Score: 0"
         self.view?.addSubview(ScoreLbl)
         
         //Setup playername label
         PlayerLabel=UILabel(frame:CGRect(x:0,y:0,width: 100,height: 50))
-        PlayerLabel.textColor=UIColor.whiteColor()
-        PlayerLabel.backgroundColor=UIColor.grayColor()
+        PlayerLabel.textColor=UIColor.white
+        PlayerLabel.backgroundColor=UIColor.gray
         PlayerLabel.text = playername
-        PlayerLabel.textAlignment = NSTextAlignment.Center
+        PlayerLabel.textAlignment = NSTextAlignment.center
         self.view?.addSubview(PlayerLabel)
 
         
@@ -72,18 +72,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
 
         physicsWorld.contactDelegate=self
         
-        for i: Int in Range(start:1, end: 100)
+        for i: Int in (1 ..< 100)
         {
             fruit = fruitsPopup(CGPoint(x: CGFloat(arc4random()%1000)+self.frame.midX, y: self.frame.midY+CGFloat(arc4random()%1000)))
             fruits.append(fruit)
         }
         
         //setup timer -- a fruit pops up
-        let timer=NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector:
+        let timer=Timer.scheduledTimer(timeInterval: 1, target: self, selector:
             #selector(GameScene.fruitsPopup),userInfo: nil,repeats: true)
         
         print(fruits.count)
-        for i: Int in Range.init(start: 1, end:20)
+        for i: Int in (1 ..< 20)
         {
             var adir1 = CGPoint.init(x: 1, y: 0)
             adir1.x = (CGFloat(arc4random()%1000))/500-1;
@@ -101,7 +101,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
     }
     
-    func createSnake(posi: CGPoint, dir :CGPoint)->Array<SKShapeNode>
+    func createSnake(_ posi: CGPoint, dir :CGPoint)->Array<SKShapeNode>
     {
         //snake initialise
         if(MyVariables.mode == 1){
@@ -115,9 +115,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         head.addChild(eye1)
         head.addChild(eye2)
         eye1.position = CGPoint.init(x: eye1.parent!.position.x+10, y: eye1.parent!.position.y+5)
-        eye1.fillColor = UIColor.blackColor()
+        eye1.fillColor = UIColor.black
         eye2.position = CGPoint.init(x: eye2.parent!.position.x+10, y: eye2.parent!.position.y-5)
-        eye2.fillColor = UIColor.blackColor()
+        eye2.fillColor = UIColor.black
         head.position = posi;
         self.addChild(head)
         Player.append(head)
@@ -125,16 +125,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         if(dir.x>0)
         {
-            let action = SKAction.rotateToAngle(atan(dir.y/dir.x), duration: 0);
-            head.runAction(action)
+            let action = SKAction.rotate(toAngle: atan(dir.y/dir.x), duration: 0);
+            head.run(action)
         }else
         {
-            let action = SKAction.rotateToAngle(atan(dir.y/dir.x)+3.14159, duration: 0);
-            head.runAction(action)
+            let action = SKAction.rotate(toAngle: atan(dir.y/dir.x)+3.14159, duration: 0);
+            head.run(action)
         }
         print("CREATSNAKEColor")
         print("SNAKECOLOR")
-        for i:Int in Range(start: 1, end: 5)
+        for i:Int in (1 ..< 5)
         {
             let a = SKShapeNode.init(circleOfRadius: 10);
             a.position = CGPoint(x: head.position.x+(CGFloat(i)*dir.x*10), y:head.position.y+(CGFloat(i)*dir.y*10))
@@ -149,7 +149,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             Player.append(a)
             }}
         else{
-            let head = SKShapeNode(rectOfSize: CGSize(width: 20, height: 20))
+            let head = SKShapeNode(rectOf: CGSize(width: 20, height: 20))
             let eye1 = SKShapeNode.init(circleOfRadius: 3)
             let eye2 = SKShapeNode.init(circleOfRadius: 3)
             //let head = SKShapeNode(rectOfSize: CGSize(width: 20, height: 20))
@@ -159,9 +159,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             head.addChild(eye1)
             head.addChild(eye2)
             eye1.position = CGPoint.init(x: eye1.parent!.position.x+10, y: eye1.parent!.position.y+5)
-            eye1.fillColor = UIColor.blackColor()
+            eye1.fillColor = UIColor.black
             eye2.position = CGPoint.init(x: eye2.parent!.position.x+10, y: eye2.parent!.position.y-5)
-            eye2.fillColor = UIColor.blackColor()
+            eye2.fillColor = UIColor.black
             head.position = posi;
             self.addChild(head)
             Player.append(head)
@@ -169,18 +169,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             
             if(dir.x>0)
             {
-                let action = SKAction.rotateToAngle(atan(dir.y/dir.x), duration: 0);
-                head.runAction(action)
+                let action = SKAction.rotate(toAngle: atan(dir.y/dir.x), duration: 0);
+                head.run(action)
             }else
             {
-                let action = SKAction.rotateToAngle(atan(dir.y/dir.x)+3.14159, duration: 0);
-                head.runAction(action)
+                let action = SKAction.rotate(toAngle: atan(dir.y/dir.x)+3.14159, duration: 0);
+                head.run(action)
             }
             print("CREATSNAKEColor")
             print("SNAKECOLOR")
-            for i:Int in Range(start: 1, end: 5)
+            for i:Int in (1 ..< 5)
             {
-                let a = SKShapeNode(rectOfSize: CGSize(width: 20, height: 20));
+                let a = SKShapeNode(rectOf: CGSize(width: 20, height: 20));
                 a.position = CGPoint(x: head.position.x+(CGFloat(i)*dir.x*10), y:head.position.y+(CGFloat(i)*dir.y*10))
                 
                 a.fillColor = UIColor(
@@ -197,36 +197,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     //create enemys' snake
-    func creatEnemySnake (posi: CGPoint, dir :CGPoint)-> Array<SKShapeNode>
+    func creatEnemySnake (_ posi: CGPoint, dir :CGPoint)-> Array<SKShapeNode>
     {
         var snake: Array<SKShapeNode>=[]
         let head = SKShapeNode.init(circleOfRadius: 10)
         let eye1 = SKShapeNode.init(circleOfRadius: 3)
         let eye2 = SKShapeNode.init(circleOfRadius: 3)
-        head.fillColor=UIColor.grayColor()
+        head.fillColor=UIColor.gray
         head.addChild(eye1)
         head.addChild(eye2)
         eye1.position = CGPoint.init(x: eye1.parent!.position.x+10, y: eye1.parent!.position.y+5)
-        eye1.fillColor = UIColor.blackColor()
+        eye1.fillColor = UIColor.black
         eye2.position = CGPoint.init(x: eye2.parent!.position.x+10, y: eye2.parent!.position.y-5)
-        eye2.fillColor = UIColor.blackColor()
+        eye2.fillColor = UIColor.black
         head.position = posi;
         self.addChild(head)
         snake.append(head)
         if(dir.x>0)
         {
-            let action = SKAction.rotateToAngle(atan(dir.y/dir.x), duration: 0);
-            head.runAction(action)
+            let action = SKAction.rotate(toAngle: atan(dir.y/dir.x), duration: 0);
+            head.run(action)
         }else
         {
-            let action = SKAction.rotateToAngle(atan(dir.y/dir.x)+3.14159, duration: 0);
-            head.runAction(action)
+            let action = SKAction.rotate(toAngle: atan(dir.y/dir.x)+3.14159, duration: 0);
+            head.run(action)
         }
-        for i:Int in Range(start: 1, end: 5)
+        for i:Int in (1 ..< 5)
         {
             let a = SKShapeNode.init(circleOfRadius: 10);
             a.position = CGPoint(x: head.position.x+(CGFloat(i)*dir.x*10), y:head.position.y+(CGFloat(i)*dir.y*10))
-            a.fillColor = UIColor.grayColor()
+            a.fillColor = UIColor.gray
             self.addChild(a)
             snake.append(a)
         }
@@ -235,13 +235,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
     }
     
-    func fruitsPopup(posi:CGPoint)->SKShapeNode{
+    func fruitsPopup(_ posi:CGPoint)->SKShapeNode{
         //get ball's image randomly from the array
         //let array=["apple.png","banana.png","strawberry.png","cherry.png"]
         let randomIndex = CGFloat(arc4random_uniform(UInt32(10-3)))
         let fruit = SKShapeNode.init(circleOfRadius: randomIndex)
         fruit.position = posi
-        fruit.fillColor = UIColor.yellowColor()
+        fruit.fillColor = UIColor.yellow
         self.addChild(fruit)
         //get balls at random position
         let MinValue=self.size.width/8
@@ -253,10 +253,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     //Snake moves follow the screen touch direction
-    func snakeMove(Player : Array<SKShapeNode>, dir: CGPoint)
+    func snakeMove(_ Player : Array<SKShapeNode>, dir: CGPoint)
     {
         print(Player.endIndex)
-        for var i = Player.endIndex-1; i > 0; i -= 1
+        for i in ((0 + 1)...Player.endIndex-1).reversed()
         {
             Player[i].position=Player[i-1].position;
             //print(i)
@@ -264,26 +264,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         Player[0].position = CGPoint (x:Player[0].position.x+dir.x*10, y:Player[0].position.y+dir.y*10)
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches{
-            let touchposition = touch.locationInNode(self)
+            let touchposition = touch.location(in: self)
             let distance = sqrt(pow(touchposition.x-mine[0].position.x, 2)+pow(touchposition.y-mine[0].position.y, 2))
             mydir = CGPoint(x: ((touchposition.x-mine[0].position.x)/distance), y: (touchposition.y-mine[0].position.y)/distance)
             print(mydir)
             if (mydir.x>0)
             {
-                let action = SKAction.rotateToAngle(atan(mydir.y/mydir.x), duration: 0)
-                self.mine[0].runAction(action)
+                let action = SKAction.rotate(toAngle: atan(mydir.y/mydir.x), duration: 0)
+                self.mine[0].run(action)
             }else
             {
-                let action = SKAction.rotateToAngle(atan(mydir.y/mydir.x)+3.14159, duration: 0)
-                self.mine[0].runAction(action)
+                let action = SKAction.rotate(toAngle: atan(mydir.y/mydir.x)+3.14159, duration: 0)
+                self.mine[0].run(action)
             }
         }
     }
     
     //SnakeDie
-    func snakeDie (she:Array<SKShapeNode>, othershes:Array<Array<SKShapeNode>>)->Bool
+    func snakeDie (_ she:Array<SKShapeNode>, othershes:Array<Array<SKShapeNode>>)->Bool
     {
         var status:Bool = false
         for othershe:Array<SKShapeNode> in othershes
@@ -301,7 +301,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     //snake eats fruits
-    func eatFruits(Player:Array<SKShapeNode>, fruits:Array<SKShapeNode>) -> Array<SKShapeNode>{
+    func eatFruits(_ Player:Array<SKShapeNode>, fruits:Array<SKShapeNode>) -> Array<SKShapeNode>{
         var fruitsReturn = fruits
         let headposition:CGPoint = Player[0].position
         for fruit:SKShapeNode in fruits
@@ -309,7 +309,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             if (sqrt(pow(headposition.x-fruit.position.x, 2)+pow(headposition.y-fruit.position.y
                 , 2))<20)
             {
-                fruitsReturn.removeAtIndex(fruits.indexOf(fruit)!)
+                fruitsReturn.remove(at: fruits.index(of: fruit)!)
                 fruit.removeFromParent()
                 
                 //Score += 1
@@ -320,7 +320,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     //snake extends length
-    func extendLength(Player:Array<SKShapeNode>) -> Array<SKShapeNode> {
+    func extendLength(_ Player:Array<SKShapeNode>) -> Array<SKShapeNode> {
         var player = Player
         if(MyVariables.mode == 1){let a = SKShapeNode.init(circleOfRadius: 10);
         a.fillColor=UIColor(
@@ -332,7 +332,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         a.position = CGPoint(x: 2*player[player.endIndex-1].position.x-player[player.endIndex-2].position.x, y:2*player[player.endIndex-1].position.y-player[player.endIndex-2].position.y)
         self.addChild(a)
             player.append(a)}
-        else{let a = SKShapeNode(rectOfSize: CGSize(width: 20, height: 20));
+        else{let a = SKShapeNode(rectOf: CGSize(width: 20, height: 20));
             a.fillColor=UIColor(
                 red: MyVariables.red,
                 green: MyVariables.green,
@@ -346,7 +346,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     //Update
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         if #available(iOS 9.0, *) {
             print(theCamera.position)
         } else {
@@ -355,7 +355,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         print(self.mine[0].position)
         self.snakeMove(self.mine, dir:mydir)
 
-        for i:Int in Range.init(start: 0, end: self.enemys.count)
+        for i:Int in (0 ..< self.enemys.count)
         {
             if (count % 10 == 0)
             {
@@ -367,12 +367,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             enemy = self.enemys[i]
             if(adir[i].x>0)
             {
-                let action = SKAction.rotateToAngle(atan(adir[i].y/adir[i].x), duration: 0);
-                enemy[0].runAction(action)
+                let action = SKAction.rotate(toAngle: atan(adir[i].y/adir[i].x), duration: 0);
+                enemy[0].run(action)
             }else
             {
-                let action = SKAction.rotateToAngle(atan(adir[i].y/adir[i].x)+3.14159, duration: 0);
-                enemy[0].runAction(action)
+                let action = SKAction.rotate(toAngle: atan(adir[i].y/adir[i].x)+3.14159, duration: 0);
+                enemy[0].run(action)
             }
             self.snakeMove(enemy, dir: adir[i])
             let fruitLength = Score
@@ -392,21 +392,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             
         }
         var otherPlayers = enemys
-        otherPlayers.append(self.mine)
-        for i:Int in Range.init(start: 0, end: otherPlayers.count-1)
+       // otherPlayers.append(self.mine)
+        otherPlayers!.append(self.mine)
+        for i:Int in (0 ..< (otherPlayers?.count)!-1)
         {
             var otherSnakes = otherPlayers
-            for j:Int in Range.init(start: 0, end: otherSnakes.count)
+            for j:Int in (0 ..< (otherSnakes?.count)!)
             {
-                if(otherPlayers[i]==otherSnakes[j])
+                if((otherPlayers?[i])!==(otherSnakes?[j])!)
                 {
-                    otherSnakes.removeAtIndex(j)
+                    //otherSnakes.remove(at: j)
+                    otherSnakes!.remove(at: j)
                     break
                 }
             }
-            if(self.snakeDie(otherPlayers[i], othershes: otherSnakes))
+            if(self.snakeDie((otherPlayers?[i])!, othershes: otherSnakes!))
             {
-                for t:Int in Range.init(start: 0, end: enemys[i].count)
+                for t:Int in (0 ..< enemys[i].count)
                 {
                     enemys[i][t].removeFromParent();
                     returnFruits = fruitsPopup(CGPoint(x: CGFloat(arc4random()%1000)+enemys[i][t].position.x, y: enemys[i][t].position.y+CGFloat(arc4random()%1000)))
@@ -414,8 +416,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                     fruits.append(returnFruits)
                     
                 }
-                enemys.removeAtIndex(i)
-                adir.removeAtIndex(i)
+                enemys.remove(at: i)
+                adir.remove(at: i)
             }
             
         }

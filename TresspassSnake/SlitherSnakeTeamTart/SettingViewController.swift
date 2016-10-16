@@ -42,24 +42,24 @@ class SettingViewController: UIViewController {
     
     @IBOutlet weak var colorsetting: UISegmentedControl!
     
-    @IBAction func redcolorchange(sender: AnyObject) {
+    @IBAction func redcolorchange(_ sender: AnyObject) {
         displayColors()
     }
     
  
-    @IBAction func greencolorchange(sender: AnyObject) {
+    @IBAction func greencolorchange(_ sender: AnyObject) {
         displayColors()
 
     }
     
-    @IBAction func bluecolorchange(sender: AnyObject) {
+    @IBAction func bluecolorchange(_ sender: AnyObject) {
         displayColors()
 
     }
     
-    @IBAction func choosemode1(sender: AnyObject) {
+    @IBAction func choosemode1(_ sender: AnyObject) {
         
-        circle.image = circle.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        circle.image = circle.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         circle.tintColor = UIColor(
             red: MyVariables.red,
             green: MyVariables.green,
@@ -70,9 +70,9 @@ class SettingViewController: UIViewController {
     
     
     
-    @IBAction func changemode2(sender: AnyObject) {
+    @IBAction func changemode2(_ sender: AnyObject) {
         MyVariables.mode = 2
-        square.image = square.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        square.image = square.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         square.tintColor = UIColor(
             red: MyVariables.red,
             green: MyVariables.green,
@@ -104,7 +104,7 @@ class SettingViewController: UIViewController {
             alpha: 1.0)
 
         
-        snakecolor.image = snakecolor.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        snakecolor.image = snakecolor.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         snakecolor.tintColor = UIColor(
             red: MyVariables.red,
             green: MyVariables.green,
@@ -117,10 +117,10 @@ class SettingViewController: UIViewController {
     
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         print("SettingprepareForSegue did load")
         if segue.identifier == "MySegueID" {
-        let secondVC2 = segue.destinationViewController as! GameViewController
+        let secondVC2 = segue.destination as! GameViewController
         secondVC2.SnakeColor = displayColors()
         print(displayColors())}
         }

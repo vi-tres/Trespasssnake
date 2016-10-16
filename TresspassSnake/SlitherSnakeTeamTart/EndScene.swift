@@ -13,12 +13,12 @@ var gameOverImage=SKSpriteNode(imageNamed:"gameover.png")
 var gameoverlb = UILabel()
 
 class EndScene: SKScene{
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         //gameOverImage.position = CGPoint(x: self.size.width/2.0, y: self.size.height/2.0)
         //self.backgroundColor=UIColor.blackColor()
         gameoverlb=UILabel(frame:CGRect(x:50,y:50,width: 100,height: 50))
-        gameoverlb.textColor=UIColor.whiteColor()
-        gameoverlb.backgroundColor=UIColor.yellowColor()
+        gameoverlb.textColor=UIColor.white
+        gameoverlb.backgroundColor=UIColor.yellow
         gameoverlb.text="Game Over!"
         self.view?.addSubview(ScoreLbl)
     }
