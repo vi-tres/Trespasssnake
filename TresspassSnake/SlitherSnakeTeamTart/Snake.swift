@@ -21,24 +21,24 @@ struct WorldSize{
 //An enumeration defines a common type for a group of related values and enables you to work with those 
 //values in a type-safe way within your code.
 enum Directions{
-    case East
-    case South
-    case West
-    case North
+    case east
+    case south
+    case west
+    case north
     
     //move torwards the direction
-    func move(point:Position, worldSize:WorldSize)->(Position){
+    func move(_ point:Position, worldSize:WorldSize)->(Position){
         var positionX=point.x
         var positionY=point.y
         
         switch self{
-        case East:
+        case .east:
             positionX=worldSize.width+1
-        case South:
+        case .south:
             positionY=worldSize.height-1
-        case West:
+        case .west:
             positionX=worldSize.width-1
-        case North:
+        case .north:
             positionY=worldSize.height+1
         }
         return Position(x:positionX, y:positionY)

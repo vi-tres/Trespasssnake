@@ -20,17 +20,17 @@ class MainViewController: UIViewController {
         
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
-        bannerView.loadRequest(GADRequest())
+        bannerView.load(GADRequest())
         
         self.view.addSubview(closeButton)
-        closeButton.addTarget(self, action: "hideAd:", forControlEvents: UIControlEvents.TouchUpInside)
+        closeButton.addTarget(self, action: #selector(MainViewController.hideAd(_:)), for: UIControlEvents.touchUpInside)
         // Do any additional setup after loading the view.
     }
 
-    func hideAd(sender:AnyObject){
+    func hideAd(_ sender:AnyObject){
         
-        self.bannerView.hidden = true
-        self.closeButton.hidden = true
+        self.bannerView.isHidden = true
+        self.closeButton.isHidden = true
         // or do
         self.closeButton.removeFromSuperview()
         self.bannerView.removeFromSuperview()
