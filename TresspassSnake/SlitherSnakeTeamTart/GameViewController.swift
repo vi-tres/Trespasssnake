@@ -14,6 +14,7 @@ class GameViewController: UIViewController {
     var PlayerName = ""
     var SnakeColor: UIColor!
     
+    
 
     override func viewDidLoad() {
         
@@ -39,7 +40,11 @@ class GameViewController: UIViewController {
             skView.presentScene(scene)
             
             
-        }    }
+        }
+        
+    
+    
+    }
 
     override var shouldAutorotate : Bool {
         return true

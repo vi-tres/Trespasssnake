@@ -21,7 +21,7 @@ var ScoreLbl=UILabel()
 
 var PlayerLabel=UILabel()
 
-
+let DarkenOpacity: CGFloat = 0.8
 var mydir:CGPoint = CGPoint(x:1,y:0)
 var adir:Array<CGPoint>! = []
 
@@ -41,6 +41,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var enemy:Array<SKShapeNode>!
     var playername = " "
     var snakecolor = MyVariables.color
+    
+    var darkenLayer: SKSpriteNode?
+    var gameOverLabel: SKLabelNode?
+    var playernameLabel: SKLabelNode?
+    var playerscoreLabel: SKLabelNode?
+    var gameOver = false
+    var gameOverElapsed: CFTimeInterval = 0
 
     override func didMove(to view: SKView) {
         /* Setup your scene here */
@@ -255,7 +262,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     //Snake moves follow the screen touch direction
     func snakeMove(_ Player : Array<SKShapeNode>, dir: CGPoint)
     {
-        print(Player.endIndex)
+        //print(Player.endIndex)
         for i in ((0 + 1)...Player.endIndex-1).reversed()
         {
             Player[i].position=Player[i-1].position;
@@ -269,7 +276,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             let touchposition = touch.location(in: self)
             let distance = sqrt(pow(touchposition.x-mine[0].position.x, 2)+pow(touchposition.y-mine[0].position.y, 2))
             mydir = CGPoint(x: ((touchposition.x-mine[0].position.x)/distance), y: (touchposition.y-mine[0].position.y)/distance)
-            print(mydir)
+            //print(mydir)
             if (mydir.x>0)
             {
                 let action = SKAction.rotate(toAngle: atan(mydir.y/mydir.x), duration: 0)
@@ -348,11 +355,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     //Update
     override func update(_ currentTime: TimeInterval) {
         if #available(iOS 9.0, *) {
-            print(theCamera.position)
+            //print(theCamera.position)
         } else {
             // Fallback on earlier versions
         }
-        print(self.mine[0].position)
+       // print(self.mine[0].position)
         self.snakeMove(self.mine, dir:mydir)
 
         for i:Int in (0 ..< self.enemys.count)
@@ -444,7 +451,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         //if user die, jump to game end scene
         if(snakeDie(self.mine, othershes: enemys))
         {
-            self.view?.presentScene(EndScene())
+            if((self.mine) != nil){
+            
+            gameOver = true
+            gameOverElapsed = 0
+            
+            gameOverLabel = SKLabelNode(fontNamed: "Helvetica")
+            gameOverLabel?.text = "Game Over!"
+            gameOverLabel?.fontSize = 44
+            gameOverLabel?.position = self.mine[0].position
+                
+            addChild(gameOverLabel!)
+           
+                print("GAMEOVER Self")}
+            else{
+                print("lalal")
+            }
         }
         count = count + 1
         if(count == 10)
