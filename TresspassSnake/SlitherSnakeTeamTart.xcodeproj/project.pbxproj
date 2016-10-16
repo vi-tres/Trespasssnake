@@ -38,6 +38,8 @@
 		C1E792AA1DB2F38200D3ADEE /* snake-skin.png in Resources */ = {isa = PBXBuildFile; fileRef = C1E792A91DB2F38200D3ADEE /* snake-skin.png */; };
 		C1E792B11DB2F92200D3ADEE /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = C1E792AF1DB2F92200D3ADEE /* circle.png */; };
 		C1E792B21DB2F92200D3ADEE /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = C1E792B01DB2F92200D3ADEE /* square.png */; };
+		C1E792B41DB32E9E00D3ADEE /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E792B31DB32E9E00D3ADEE /* GameOverViewController.swift */; };
+		C1E792B81DB3308800D3ADEE /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E792B71DB3308800D3ADEE /* GameOver.swift */; };
 		C1FB54FA1DB214990098C016 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB54F91DB214990098C016 /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +98,8 @@
 		C1E792A91DB2F38200D3ADEE /* snake-skin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "snake-skin.png"; sourceTree = "<group>"; };
 		C1E792AF1DB2F92200D3ADEE /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
 		C1E792B01DB2F92200D3ADEE /* square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square.png; sourceTree = "<group>"; };
+		C1E792B31DB32E9E00D3ADEE /* GameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
+		C1E792B71DB3308800D3ADEE /* GameOver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		C1FB54F91DB214990098C016 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,6 +169,8 @@
 				14F5992B1D83CAC100780E84 /* GameViewController.swift */,
 				C1E792A91DB2F38200D3ADEE /* snake-skin.png */,
 				14F5992D1D83CAC100780E84 /* Main.storyboard */,
+				C1E792B71DB3308800D3ADEE /* GameOver.swift */,
+				C1E792B31DB32E9E00D3ADEE /* GameOverViewController.swift */,
 				C185D39B1DB1E2D500BBFCB8 /* loge.png */,
 				C1E792AF1DB2F92200D3ADEE /* circle.png */,
 				C1E792B01DB2F92200D3ADEE /* square.png */,
@@ -369,11 +375,13 @@
 				14F599661D83E65B00780E84 /* Snake.swift in Sources */,
 				C1FB54FA1DB214990098C016 /* SettingViewController.swift in Sources */,
 				C1D4CEFB1DACF3BD00096186 /* MPCHandler.swift in Sources */,
+				C1E792B81DB3308800D3ADEE /* GameOver.swift in Sources */,
 				14F5992A1D83CAC100780E84 /* GameScene.swift in Sources */,
 				C1D4CEFF1DACFA3500096186 /* MultipleViewController.swift in Sources */,
 				14F5992C1D83CAC100780E84 /* GameViewController.swift in Sources */,
 				C1D4CEF71DACD54200096186 /* MainViewController.swift in Sources */,
 				C1D4CEF91DACD6F900096186 /* ViewController.swift in Sources */,
+				C1E792B41DB32E9E00D3ADEE /* GameOverViewController.swift in Sources */,
 				14F599261D83CAC100780E84 /* AppDelegate.swift in Sources */,
 				1479335F1DA6B74900BE4FED /* EndScene.swift in Sources */,
 				C1B93AB81DADBDB6001511CD /* InviteViewController.swift in Sources */,

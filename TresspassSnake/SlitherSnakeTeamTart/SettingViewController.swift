@@ -22,6 +22,10 @@ struct MyVariables {
 
 class SettingViewController: UIViewController {
 
+    
+    
+    
+    
     @IBOutlet weak var circle: UIImageView!
     
     @IBOutlet weak var square: UIImageView!
