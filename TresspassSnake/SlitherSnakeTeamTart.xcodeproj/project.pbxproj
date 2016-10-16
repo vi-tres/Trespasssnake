@@ -324,20 +324,18 @@
 				TargetAttributes = {
 					14F599211D83CAC100780E84 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 4MV5DUA867;
+						DevelopmentTeam = JWXTMT93MM;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					14F599391D83CAC100780E84 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = JWXTMT93MM;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						TestTargetID = 14F599211D83CAC100780E84;
 					};
 					14F599441D83CAC100780E84 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = JWXTMT93MM;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 14F599211D83CAC100780E84;
@@ -568,15 +566,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 4MV5DUA867;
+				DEVELOPMENT_TEAM = JWXTMT93MM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SDKs/GoogleMobileAdsSdkiOS-7.12.1",
 				);
 				INFOPLIST_FILE = SlitherSnakeTeamTart/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = TeamTart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MelbUni.794111.SlitherSnakeTeamTartUITest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -590,15 +588,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 4MV5DUA867;
+				DEVELOPMENT_TEAM = JWXTMT93MM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SDKs/GoogleMobileAdsSdkiOS-7.12.1",
 				);
 				INFOPLIST_FILE = SlitherSnakeTeamTart/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = TeamTart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MelbUni.794111.SlitherSnakeTeamTartUITest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -610,9 +608,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = JWXTMT93MM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SlitherSnakeTeamTartTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = teamTart;
@@ -626,8 +625,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JWXTMT93MM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SlitherSnakeTeamTartTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = teamTart;
@@ -640,9 +640,10 @@
 		14F599551D83CAC100780E84 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = JWXTMT93MM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SlitherSnakeTeamTartUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MelbUni.794111.SlitherSnakeTeamTartUITests;
@@ -655,8 +656,9 @@
 		14F599561D83CAC100780E84 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JWXTMT93MM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SlitherSnakeTeamTartUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MelbUni.794111.SlitherSnakeTeamTartUITests;
