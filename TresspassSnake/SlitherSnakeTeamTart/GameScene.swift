@@ -21,10 +21,8 @@ var ScoreLbl=UILabel()
 
 var PlayerLabel=UILabel()
 
-<<<<<<< HEAD
 let DarkenOpacity: CGFloat = 0.8
-=======
->>>>>>> cb28f32f8adeefcd4e6a3743c194061ce336f7a4
+
 var mydir:CGPoint = CGPoint(x:1,y:0)
 var adir:Array<CGPoint>! = []
 
@@ -440,7 +438,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             // Fallback on earlier versions
         }
         
-        //if user die, jump to game end scene
+        //if user die, remove user's snake from jump to game end scene
         if(snakeDie(self.mine, othershes: enemys))
         {
             if((self.mine) != nil){
@@ -459,6 +457,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             else{
                 print("lalal")
             }
+
         }
         count = count + 1
         if(count == 10)
