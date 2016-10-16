@@ -21,7 +21,6 @@ var ScoreLbl=UILabel()
 
 var PlayerLabel=UILabel()
 
-
 var mydir:CGPoint = CGPoint(x:1,y:0)
 var adir:Array<CGPoint>! = []
 
@@ -36,7 +35,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var mine:Array<SKShapeNode>!
     var fruits:Array<SKShapeNode>!=[]
     var fruit :SKShapeNode!
-    var returnFruits :SKShapeNode!
+    var returnFruit :SKShapeNode!
     var enemys:Array<Array<SKShapeNode>>!=[]
     var enemy:Array<SKShapeNode>!
     var playername = " "
@@ -93,12 +92,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             adir.append(adir1)
         }
         
-        //set initial camera start position
-        if #available(iOS 9.0, *) {
-            theCamera.position = CGPoint(x: self.mine[0].position.x - self.frame.midX/2, y: self.mine[0].position.y)
-        } else {
-            // Fallback on earlier versions
-        }
+        //set the camera start position
+        theCamera.position = CGPoint(x: self.mine[0].position.x - self.frame.midX/2, y: self.mine[0].position.y)
     }
     
     func createSnake(_ posi: CGPoint, dir :CGPoint)->Array<SKShapeNode>
@@ -236,19 +231,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     func fruitsPopup(_ posi:CGPoint)->SKShapeNode{
-        //get ball's image randomly from the array
-        //let array=["apple.png","banana.png","strawberry.png","cherry.png"]
-        let randomIndex = CGFloat(arc4random_uniform(UInt32(10-3)))
+        let randomIndex = CGFloat(arc4random_uniform(UInt32(11-5)))
         let fruit = SKShapeNode.init(circleOfRadius: randomIndex)
         fruit.position = posi
         fruit.fillColor = UIColor.yellow
         self.addChild(fruit)
-        //get balls at random position
-        let MinValue=self.size.width/8
-        let MaxValue=self.size.width-150
-        let Point=UInt32(MaxValue-MinValue)
-        fruit.position=CGPoint(x:CGFloat(arc4random_uniform(Point)),y:(CGFloat(arc4random_uniform(Point))))
-
+        
         return fruit
     }
     
@@ -302,21 +290,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     //snake eats fruits
     func eatFruits(_ Player:Array<SKShapeNode>, fruits:Array<SKShapeNode>) -> Array<SKShapeNode>{
-        var fruitsReturn = fruits
+        var FruitsReturn = fruits
         let headposition:CGPoint = Player[0].position
         for fruit:SKShapeNode in fruits
         {
             if (sqrt(pow(headposition.x-fruit.position.x, 2)+pow(headposition.y-fruit.position.y
                 , 2))<20)
             {
-                fruitsReturn.remove(at: fruits.index(of: fruit)!)
+                FruitsReturn.remove(at: fruits.index(of: fruit)!)
                 fruit.removeFromParent()
-                
-                //Score += 1
-                //ScoreLbl.text="Score: "+"\(Score)"
+                break
             }
         }
-        return fruitsReturn
+        return FruitsReturn
     }
     
     //snake extends length
@@ -377,11 +363,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             self.snakeMove(enemy, dir: adir[i])
             let fruitLength = Score
             fruits = self.eatFruits(enemy, fruits: fruits)
-            /*if(self.eatFruits(self.mine: , fruits: fruits)==true){
-                Score += 1
-                ScoreLbl.text="Score: "+"\(Score)"
-                
-            }*/
+            
             let pScore = Score
             
             if ((!(fruitLength == pScore)))
@@ -392,33 +374,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             
         }
         var otherPlayers = enemys
-       // otherPlayers.append(self.mine)
+
         otherPlayers!.append(self.mine)
-        for i:Int in (0 ..< (otherPlayers?.count)!-1)
+        
+        //remove snake from enemys if it dies
+        var i : Int
+        i = (otherPlayers?.count)!-2
+        while (i>=0)
         {
             var otherSnakes = otherPlayers
             for j:Int in (0 ..< (otherSnakes?.count)!)
             {
                 if((otherPlayers?[i])!==(otherSnakes?[j])!)
                 {
-                    //otherSnakes.remove(at: j)
                     otherSnakes!.remove(at: j)
                     break
                 }
             }
             if(self.snakeDie((otherPlayers?[i])!, othershes: otherSnakes!))
             {
-                for t:Int in (0 ..< enemys[i].count)
+                var t = enemys[i].count-1
+                while(t>=0)
                 {
                     enemys[i][t].removeFromParent();
-                    returnFruits = fruitsPopup(CGPoint(x: CGFloat(arc4random()%1000)+enemys[i][t].position.x, y: enemys[i][t].position.y+CGFloat(arc4random()%1000)))
-                    
-                    fruits.append(returnFruits)
-                    
+            
+                    returnFruit = fruitsPopup(CGPoint(x: CGFloat(arc4random()%10)+enemys[i][t].position.x, y: enemys[i][t].position.y+CGFloat(arc4random()%10)))
+                
+                    fruits.append(returnFruit)
+                    t-=1
                 }
                 enemys.remove(at: i)
                 adir.remove(at: i)
             }
+            i-=1
             
         }
         
