@@ -41,6 +41,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var enemys:Array<Array<SKShapeNode>>!=[]
     var enemy:Array<SKShapeNode>!
     var playername = " "
+
+    var joystick: Array<SKShapeNode>?
+    var mode:Int = 2
+    var modes:Array<Int> = [1, 2, 3]
+    var border: SKShapeNode!
+    var smallMapp:Array<SKShapeNode>!
     var snakecolor = MyVariables.color
     
     var darkenLayer: SKSpriteNode?
@@ -101,6 +107,62 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             adir.append(adir1)
         }
         
+
+        //set initial camera start position
+        if #available(iOS 9.0, *) {
+            theCamera.position = CGPoint(x: self.mine[0].position.x - self.frame.midX/2, y: self.mine[0].position.y)
+        } else {
+            // Fallback on earlier versions
+        }
+        if (mode == 3)
+        {
+            joystick = createJoyStick()
+        }
+        border = SKShapeNode.init(circleOfRadius: 2000)
+        border.fillColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: 0.01)
+        border.position=mine[0].position
+        border.lineWidth = 20
+        self.addChild(border)
+        smallMapp = createSmallMapp()
+    }
+    func createSmallMapp () -> Array<SKShapeNode>
+    {
+        var map: Array<SKShapeNode> = []
+        let border: SKShapeNode = SKShapeNode.init(circleOfRadius: 50)
+        border.fillColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
+        border.position = CGPoint(x:self.mine[0].position.x-100, y: self.mine[0].position.y-200)
+        self.addChild(border)
+        let point = SKShapeNode.init(circleOfRadius: 3)
+        point.fillColor = UIColor.whiteColor()
+        point.position = border.position
+        self.addChild(point)
+        map.append(border)
+        map.append(point)
+        return map
+    }
+    func createJoyStick () -> Array<SKShapeNode>
+        
+    {
+        var joystick: Array<SKShapeNode>= []
+        let panel = SKShapeNode.init(circleOfRadius: 50)
+        let mover = SKShapeNode.init(circleOfRadius: 20)
+        panel.addChild(mover)
+        mover.position = (mover.parent?.position)!
+        panel.fillColor = UIColor.blackColor()
+        mover.fillColor = UIColor.init(red: 0, green: 0, blue: 1, alpha: 0.2)
+        if #available(iOS 9.0, *) {
+            panel.position = CGPoint.init(x: self.mine[0].position.x+150, y:self.mine[0].position.y-200)
+        } else {
+            // Fallback on earlier versions
+        }
+        self.addChild(panel)
+        
+        joystick.append(panel)
+        joystick.append(mover)
+        
+        return joystick
+    }
+    func createSnake(posi: CGPoint, dir :CGPoint)->Array<SKShapeNode>
         //set the camera start position
         theCamera.position = CGPoint(x: self.mine[0].position.x - self.frame.midX/2, y: self.mine[0].position.y)
     }
@@ -261,6 +323,64 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         Player[0].position = CGPoint (x:Player[0].position.x+dir.x*10, y:Player[0].position.y+dir.y*10)
     }
 
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if (mode == 1)
+        {
+            for touch in touches{
+                let touchposition = touch.locationInNode(self)
+                let distance = sqrt(pow(touchposition.x-mine[0].position.x, 2)+pow(touchposition.y-mine[0].position.y, 2))
+                mydir = CGPoint(x: ((touchposition.x-mine[0].position.x)/distance), y: (touchposition.y-mine[0].position.y)/distance)
+                print(mydir)
+                if (mydir.x>0)
+                {
+                    let action = SKAction.rotateToAngle(atan(mydir.y/mydir.x), duration: 0)
+                    self.mine[0].runAction(action)
+                }else
+                {
+                    let action = SKAction.rotateToAngle(atan(mydir.y/mydir.x)+3.14159, duration: 0)
+                    self.mine[0].runAction(action)
+                }
+            }
+        }
+
+    }
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if (mode == 3)
+        {
+            var bigBall:SKNode = joystick![0]
+            var smallBall:SKNode = bigBall.children[0]
+            print(bigBall.position)
+            print(smallBall.position)
+            if (smallBall.position.x==0)
+            {
+                smallBall.position = CGPoint.init(x: smallBall.position.x+30, y: smallBall.position.y)
+            }
+            for touch:UITouch in touches
+            {
+                print(touch.locationInNode(self))
+                var vect = CGPoint.init(x: touch.locationInNode(self).x-bigBall.position.x, y: touch.locationInNode(self).y-bigBall.position.y)
+                var angel = atan(Double(vect.y)/Double(vect.x))
+                if (vect.x>0)
+                {
+                    bigBall.runAction(SKAction.rotateToAngle(CGFloat(angel), duration: 0))
+                }else
+                {
+                    bigBall.runAction(SKAction.rotateToAngle(CGFloat(angel)+3.14, duration: 0))
+                }
+                let touchposition = touch.locationInNode(self)
+                let distance = sqrt(pow(touchposition.x-joystick![0].position.x, 2)+pow(touchposition.y-joystick![0].position.y, 2))
+                mydir = CGPoint(x: ((touchposition.x-joystick![0].position.x)/distance), y: (touchposition.y-joystick![0].position.y)/distance)
+                print(mydir)
+                if (mydir.x>0)
+                {
+                    let action = SKAction.rotateToAngle(atan(mydir.y/mydir.x), duration: 0)
+                    self.mine[0].runAction(action)
+                }else
+                {
+                    let action = SKAction.rotateToAngle(atan(mydir.y/mydir.x)+3.14159, duration: 0)
+                    self.mine[0].runAction(action)
+                }
+                
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches{
             let touchposition = touch.location(in: self)
@@ -276,6 +396,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                 let action = SKAction.rotate(toAngle: atan(mydir.y/mydir.x)+3.14159, duration: 0)
                 self.mine[0].run(action)
             }
+            
+            
+        }
+        
+        if (mode == 2)
+        {
+            
+            for touch:UITouch in touches
+            {
+                
+                let touchposition = touch.locationInNode(self)
+                let previewposition = touch.previousLocationInNode(self)
+                let distance = sqrt(pow(touchposition.x-previewposition.x, 2)+pow(touchposition.y-previewposition.y, 2))
+                mydir = CGPoint(x: ((touchposition.x-previewposition.x)/distance), y: (touchposition.y-previewposition.y)/distance)
+                print(mydir)
+                if (mydir.x>0)
+                {
+                    let action = SKAction.rotateToAngle(atan(mydir.y/mydir.x), duration: 0)
+                    self.mine[0].runAction(action)
+                }else
+                {
+                    let action = SKAction.rotateToAngle(atan(mydir.y/mydir.x)+3.14159, duration: 0)
+                    self.mine[0].runAction(action)
+                }
+                
+            }
+            
+            
         }
     }
     
@@ -349,6 +497,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
        // print(self.mine[0].position)
         self.snakeMove(self.mine, dir:mydir)
+        if (mode == 3)
+        {
+            joystick?[0].position = CGPoint.init(x: self.mine[0].position.x+150, y:self.mine[0].position.y-200)
+        }
+        
+        smallMapp[0].position = CGPoint.init(x: self.mine[0].position.x-100, y:self.mine[0].position.y-200)
+        let vect = CGPoint.init(x: self.mine[0].position.x-border.position.x, y: self.mine[0].position.y-border.position.y)
+        let smallVect = CGPoint.init(x: vect.x/40, y: vect.y/40)
+        smallMapp[1].position = CGPoint.init(x: smallMapp[0].position.x+smallVect.x, y: smallMapp[0].position.y+smallVect.y)
 
         for i:Int in (0 ..< self.enemys.count)
         {
@@ -469,3 +626,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
 
 }
+
